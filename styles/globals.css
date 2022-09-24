@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .text-shadow {
+    text-shadow: 0.3rem 0.3rem 2px theme('colors.gray-light');
+  }
+
+  /* ... */
+}

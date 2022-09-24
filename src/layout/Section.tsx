@@ -5,11 +5,15 @@ type SectionProps = {
   children: React.ReactNode;
 };
 
-export default function Section({ title, children }: SectionProps) {
-  return (
-    <section>
-      <h1>{title}</h1>
-      <div>{children}</div>
+const Section = React.forwardRef<HTMLElement, SectionProps>(
+  ({ children, title }, ref) => (
+    <section ref={ref}>
+      <h2 className="">{title}</h2>
+      <div className="">{children}</div>
     </section>
-  );
-}
+  )
+);
+
+Section.displayName = "Section";
+
+export default Section;
