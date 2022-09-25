@@ -7,7 +7,7 @@ interface Props {
 
 export const MarkdownSection: FC<Props> = ({ content }) => {
   return (
-    <div className="prose prose-white prose-lg mx-auto">
+    <div className="prose prose-white prose-lg mx-auto max-w-none">
       <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
     </div>
   );

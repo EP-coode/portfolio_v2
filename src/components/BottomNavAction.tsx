@@ -16,9 +16,9 @@ export default function BottomNavAction({
   return (
     <div
       className={classNames(
-        "flex flex-col h-full items-center mx-2 cursor-pointer transition-colors basis-20",
+        "flex flex-col basis-20 flex-grow h-full items-center mx-2 cursor-pointer transition-all",
         {
-          "text-blue-400": isActive,
+          "text-blue-400 scale-105": isActive,
           "text-white": !isActive,
         }
       )}

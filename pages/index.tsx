@@ -47,8 +47,6 @@ const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
   const myProjects = useRef<HTMLElement | null>(null);
   const contactMe = useRef<HTMLElement | null>(null);
 
-  console.log(aboutMeSection);
-
   const scrolToRef = (ref: React.RefObject<HTMLElement>) => {
     ref.current?.scrollIntoView({
       behavior: "smooth",
@@ -65,6 +63,16 @@ const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
       </Head>
       <Banner title="Hi I'm Ernest, a web developer" />
       <div className="m-7">
+        {aboutMeSection && (
+          <Section title={aboutMeSection.data.title} ref={aboutMeRef}>
+            <MarkdownSection content={aboutMeSection.content} />
+          </Section>
+        )}
+        {aboutMeSection && (
+          <Section title={aboutMeSection.data.title} ref={aboutMeRef}>
+            <MarkdownSection content={aboutMeSection.content} />
+          </Section>
+        )}
         {aboutMeSection && (
           <Section title={aboutMeSection.data.title} ref={aboutMeRef}>
             <MarkdownSection content={aboutMeSection.content} />
