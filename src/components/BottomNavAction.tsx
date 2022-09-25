@@ -16,7 +16,7 @@ export default function BottomNavAction({
   return (
     <div
       className={classNames(
-        "flex flex-col h-full min-w-fit items-center mx-2 transition-transform cursor-pointer",
+        "flex flex-col h-full items-center mx-2 cursor-pointer transition-colors basis-20",
         {
           "text-blue-400": isActive,
           "text-white": !isActive,
@@ -24,7 +24,7 @@ export default function BottomNavAction({
       )}
       onClick={() => action && action()}
     >
-      <div className="w-fit h-fit flex-grow">{icon}</div>
+      <div className="flex-grow h-2 w-full flex justify-center">{icon}</div>
       <div>{label}</div>
     </div>
   );

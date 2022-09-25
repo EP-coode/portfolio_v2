@@ -3,7 +3,6 @@ import { SVGProps } from "react";
 
 const WorkerIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
-    height="100%"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 305.762 305.762"
     fill="currentColor"
