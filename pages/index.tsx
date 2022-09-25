@@ -1,18 +1,53 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRef } from "react";
+
+import fs from "fs";
+import matter from "gray-matter";
+
 import Banner from "../src/components/Banner";
 import BottomNav from "../src/components/BottomNav";
 import BottomNavAction from "../src/components/BottomNavAction";
-import CirclePersonIcon from "../src/icons/CirclePersonIcon";
-import ResumeIcon from "../src/icons/ResumeIcon";
-import WorkerIcon from "../src/icons/WorkerIcon";
+import { CirclePersonIcon, ResumeIcon, WorkerIcon } from "../src/icons";
 import Section from "../src/layout/Section";
+import { MarkdownSection } from "../src/components/MarkdownSection";
 
-const Home: NextPage = () => {
+export async function getStaticProps() {
+  let aboutMeSection;
+
+  try {
+    const readFile = fs.readFileSync(`content/aboutme.md`, "utf-8");
+    const { data, content } = matter(readFile);
+    aboutMeSection = {
+      data,
+      content,
+    };
+  } catch (e) {
+    console.error(e);
+  }
+
+  return {
+    props: {
+      aboutMeSection,
+    },
+  };
+}
+
+interface HomePageProps {
+  aboutMeSection?: {
+    data: {
+      title: string;
+    };
+    content: any;
+  };
+}
+
+const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
   const aboutMeRef = useRef<HTMLElement | null>(null);
   const myProjects = useRef<HTMLElement | null>(null);
   const contactMe = useRef<HTMLElement | null>(null);
+
+  console.log(aboutMeSection);
 
   const scrolToRef = (ref: React.RefObject<HTMLElement>) => {
     ref.current?.scrollIntoView({
@@ -29,23 +64,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Banner title="Hi I'm Ernest, a web developer" />
-      <Section title="About me" ref={aboutMeRef}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas quaerat
-        sed ex laboriosam quidem rerum est. Rerum officiis enim ex molestias hic
-        quaerat maxime, laudantium rem accusantium deleniti doloremque amet!
-      </Section>
-      <Section title="My Projects" ref={myProjects}>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-        ipsum velit enim molestias autem quo consectetur facere, blanditiis
-        minima in, maiores ipsa a pariatur, natus dolor harum vero quibusdam
-        distinctio.
-      </Section>
-      <Section title="Contact Me" ref={contactMe}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-        magnam, quam blanditiis suscipit possimus labore officiis dolorem quo
-        aliquid distinctio consequatur doloribus voluptatem, eum magni
-        aspernatur reiciendis, repellat fugiat animi.
-      </Section>
+      <div className="m-7">
+        {aboutMeSection && (
+          <Section title={aboutMeSection.data.title} ref={aboutMeRef}>
+            <MarkdownSection content={aboutMeSection.content} />
+          </Section>
+        )}
+      </div>
       <BottomNav>
         <BottomNavAction
           icon={<CirclePersonIcon />}
