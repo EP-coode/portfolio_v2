@@ -9,12 +9,10 @@ type Props = {
 export default function SlideLeft({ children, slidedIn }: Props) {
   return (
     <div
-      className={classNames(
-        "transition-transform duration-700 translate-x-full overflow-hidden",
-        {
-          "translate-x-0": slidedIn,
-        }
-      )}
+      className={classNames("transition-all duration-1000", {
+        "translate-x-0 opacity-1": slidedIn,
+        "translate-x-full opacity-0": !slidedIn,
+      })}
     >
       {children}
     </div>

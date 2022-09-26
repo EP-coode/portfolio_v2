@@ -16,7 +16,7 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
     console.log(wasInViewport);
 
     return (
-      <section className="max-w-4xl mx-auto overflow-hidden" ref={mergedRefs}>
+      <section className="max-w-4xl mx-auto overflow-visible" ref={mergedRefs}>
         <SlideLeft slidedIn={wasInViewport}>
           <h2 className={"text-white text-3xl font-bold"}>{title}</h2>
           <div className="">{children}</div>
