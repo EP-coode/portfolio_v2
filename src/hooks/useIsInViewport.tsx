@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function useIsInViewport(
   ref: React.RefObject<HTMLElement>,
@@ -10,8 +10,9 @@ export default function useIsInViewport(
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (isInViewport != entry.isIntersecting)
+        if (isInViewport != entry.isIntersecting) {
           setIsInViewport(entry.isIntersecting);
+        }
         if (entry.isIntersecting && !wasInViewport) setWasInViewport(true);
       },
       {
@@ -26,7 +27,7 @@ export default function useIsInViewport(
     return () => {
       observer.disconnect();
     };
-  }, [ref]);
+  }, [ref, rootMargin, isInViewport, wasInViewport]);
 
   return [isInViewport, wasInViewport];
 }

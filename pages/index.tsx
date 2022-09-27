@@ -13,6 +13,7 @@ import Section from "../src/layout/Section";
 import { MarkdownSection } from "../src/components/MarkdownSection";
 import ProgresBar from "../src/components/ProgresBar";
 import useScrollPrgores from "../src/hooks/useScrollPrgores";
+import useSectionNameInTop from "../src/hooks/useSectionNameInTop";
 
 export async function getStaticProps() {
   let aboutMeSection;
@@ -46,15 +47,23 @@ interface HomePageProps {
 
 const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
   const aboutMeRef = useRef<HTMLElement | null>(null);
-  const myProjects = useRef<HTMLElement | null>(null);
-  const contactMe = useRef<HTMLElement | null>(null);
+  const myProjectsRef = useRef<HTMLElement | null>(null);
+  const contactMeRef = useRef<HTMLElement | null>(null);
+  const activeSection = useSectionNameInTop(
+    [aboutMeRef, myProjectsRef, contactMeRef],
+    "-100px"
+  );
+
   const pageProggres = useScrollPrgores();
 
-  const scrolToRef = (ref: React.RefObject<HTMLElement>) => {
-    ref.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+  const scrollIntoView = (htmlElem: HTMLElement | null) => {
+    if (!htmlElem) return;
+
+    const yOffset = -50;
+    const y =
+      htmlElem.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
   };
 
   return (
@@ -68,17 +77,21 @@ const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
       <Banner title="Hi I'm Ernest, a web developer" />
       <div className="m-7 overflow-hidden">
         {aboutMeSection && (
-          <Section title={aboutMeSection.data.title} ref={aboutMeRef}>
+          <Section
+            title={aboutMeSection.data.title}
+            name="aboutme"
+            ref={aboutMeRef}
+          >
             <MarkdownSection content={aboutMeSection.content} />
           </Section>
         )}
         {aboutMeSection && (
-          <Section title={aboutMeSection.data.title} ref={aboutMeRef}>
+          <Section title={"Projects"} name="projects" ref={myProjectsRef}>
             <MarkdownSection content={aboutMeSection.content} />
           </Section>
         )}
         {aboutMeSection && (
-          <Section title={aboutMeSection.data.title} ref={aboutMeRef}>
+          <Section title={"Contact"} name="contact" ref={contactMeRef}>
             <MarkdownSection content={aboutMeSection.content} />
           </Section>
         )}
@@ -88,23 +101,25 @@ const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
           icon={<CirclePersonIcon />}
           label="About Me"
           action={() => {
-            scrolToRef(aboutMeRef);
+            scrollIntoView(aboutMeRef.current);
           }}
+          isActive={activeSection === "aboutme"}
         />
         <BottomNavAction
           icon={<WorkerIcon />}
           label="Projects"
           action={() => {
-            scrolToRef(myProjects);
+            scrollIntoView(myProjectsRef.current);
           }}
-          isActive={true}
+          isActive={activeSection === "projects"}
         />
         <BottomNavAction
           icon={<ResumeIcon />}
-          label="Resume"
+          label="Contact"
           action={() => {
-            scrolToRef(contactMe);
+            scrollIntoView(contactMeRef.current);
           }}
+          isActive={activeSection === "contact"}
         />
       </BottomNav>
     </div>
