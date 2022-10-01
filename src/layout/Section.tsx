@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
+import { SectionContext } from "../components/context/SectionInViewContext";
 import useIsInViewport from "../hooks/useIsInViewport";
-import useMergedRefs from "../hooks/useMergedRefs";
 import SlideLeft from "../transitions/SlideLeft";
 
 type SectionProps = {
@@ -9,26 +9,29 @@ type SectionProps = {
   children: React.ReactNode;
 };
 
-const Section = React.forwardRef<HTMLElement, SectionProps>(
-  ({ children, title, name }, ref) => {
-    const secrionRef = useRef(null);
-    const mergedRefs = useMergedRefs(ref, secrionRef);
-    const [, wasInViewport] = useIsInViewport(secrionRef, "-100px");
+const Section = ({ children, title, name }: SectionProps) => {
+  const secrionRef = useRef<HTMLElement>(null);
+  const [isInViewPort, wasInViewport] = useIsInViewport(secrionRef, "-100px");
+  const sectionCtx = useContext(SectionContext);
 
-    return (
-      <section
-        className="max-w-4xl mx-auto overflow-visible"
-        id={name}
-        ref={mergedRefs}
-      >
-        <SlideLeft slidedIn={wasInViewport}>
-          <h2 className={"text-white text-3xl font-bold"}>{title}</h2>
-          <div className="">{children}</div>
-        </SlideLeft>
-      </section>
-    );
-  }
-);
+  useEffect(() => {
+    if (isInViewPort) sectionCtx?.onSectionEnter?.(secrionRef);
+    else sectionCtx?.onSectionLeave?.(secrionRef);
+  }, [isInViewPort]);
+
+  return (
+    <section
+      className="max-w-4xl mx-auto overflow-visible"
+      id={name}
+      ref={secrionRef}
+    >
+      <SlideLeft slidedIn={wasInViewport}>
+        <h2 className={"text-white text-3xl font-bold"}>{title}</h2>
+        <div className="">{children}</div>
+      </SlideLeft>
+    </section>
+  );
+};
 
 Section.displayName = "Section";
 

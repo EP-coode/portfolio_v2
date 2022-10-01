@@ -1,4 +1,6 @@
 import classNames from "classnames";
+import { useContext } from "react";
+import { SectionContext } from "../context/SectionInViewContext";
 
 type BottomNavActionProps = {
   label: string;
