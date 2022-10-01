@@ -19,7 +19,7 @@ export default function BottomNavAction({
         `flex flex-col basis-20 flex-grow h-full items-center 
           p-2 cursor-pointer transition-transform transition-colors duration-300`,
         {
-          "text-blue-400 border-t-4 border-blue-400": isActive,
+          "text-cyan-500 border-t-4 border-cyan-500": isActive,
           "text-white": !isActive,
         }
       )}

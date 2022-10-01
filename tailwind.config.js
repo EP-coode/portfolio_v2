@@ -10,8 +10,8 @@ module.exports = {
         xs: "300px",
       },
       colors: {
-        "gray-light": "#2C2222",
-        "gray-dark": "#353535",
+        "gray-light": "#353535",
+        "gray-dark": "#272727",
       },
       typography: ({ theme }) => ({
         white: {
