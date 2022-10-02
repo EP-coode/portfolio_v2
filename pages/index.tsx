@@ -10,12 +10,12 @@ import WindowScrollProgres from "../src/components/common/WindowScrollProgres";
 import { SectionContextProvider } from "../src/components/context/SectionInViewContext";
 import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
 import useMatchMaxWidth from "../src/hooks/useMatchMaxWidth";
-import SideNav from "../src/components/desktop/SideNav/SideNav";
-import BottomNavContainer from "../src/components/mobile/BottomNav/BottomNavContainer";
-import { BottomNavAction } from "../src/components/mobile/BottomNav";
+import SideNav from "../src/components/desktop/SideNav";
+import BottomNavContainer from "../src/components/mobile/BottomNavContainer";
+import { BottomNavAction } from "../src/components/mobile";
 import { CirclePersonIcon, ResumeIcon, WorkerIcon } from "../src/icons";
 import { useState } from "react";
-import SideNavAction from "../src/components/desktop/SideNav/SideNavAction";
+import SideNavAction from "../src/components/desktop/SideNavAction";
 import classNames from "classnames";
 
 export async function getStaticProps() {
