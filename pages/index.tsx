@@ -83,7 +83,7 @@ const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
             selectActiveSection={selectElementVisableInBottom}
             onActiveSectionChange={(sectionId) => setActiveSectionId(sectionId)}
           >
-            <div className="p-7 overflow-hidden">
+            <div className="p-7 pb-24 overflow-hidden">
               {aboutMeSection && (
                 <Section title={aboutMeSection.data.title} name={"AboutMe"}>
                   <MarkdownSection content={aboutMeSection.content} />
@@ -129,6 +129,16 @@ const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
               label="AboutMe"
               isActive={activeSectionId == "AboutMe"}
               action={() => scroolToViewById("AboutMe")}
+            />
+            <SideNavAction
+              label="Projects"
+              isActive={activeSectionId == "Projects"}
+              action={() => scroolToViewById("Projects")}
+            />
+            <SideNavAction
+              label="Contact"
+              isActive={activeSectionId == "Contact"}
+              action={() => scroolToViewById("Contact")}
             />
           </SideNav>
         )}
