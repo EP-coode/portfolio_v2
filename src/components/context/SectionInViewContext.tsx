@@ -1,4 +1,9 @@
-import React, { createContext, PropsWithChildren, useState } from "react";
+import React, {
+  createContext,
+  PropsWithChildren,
+  useEffect,
+  useState,
+} from "react";
 
 interface SectionContext {
   sectionsInView: React.RefObject<HTMLElement>[];
@@ -11,6 +16,7 @@ interface ContextProviderProps extends PropsWithChildren {
   selectActiveSection: (
     sectionsRef: React.RefObject<HTMLElement>[]
   ) => React.RefObject<HTMLElement> | undefined;
+  onActiveSectionChange: (activeSectionId: string | undefined) => void;
 }
 
 const defaultSectionInViewContext: SectionContext = {
@@ -25,12 +31,17 @@ export const SectionContext = createContext<SectionContext>(
 export const SectionContextProvider = ({
   children,
   selectActiveSection,
+  onActiveSectionChange,
 }: ContextProviderProps) => {
   const [sectionsInView, setSectionsInView] = useState<
     React.RefObject<HTMLElement>[]
   >([]);
   const [activeSection, setActiveSection] =
     useState<React.RefObject<HTMLElement>>();
+
+  useEffect(() => {
+    onActiveSectionChange(activeSection?.current?.id);
+  }, [activeSection]);
 
   const onSectionEnter = (sectionRef: React.RefObject<HTMLElement>) => {
     if (!sectionsInView.includes(sectionRef)) {

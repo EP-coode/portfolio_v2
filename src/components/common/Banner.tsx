@@ -9,7 +9,7 @@ type Props = {
 
 export default function Banner({ title }: Props) {
   return (
-    <div className="h-screen">
+    <div className="h-screen relative">
       <h1
         className="
           text-center text-white text-4xl xs:text-6xl text-shadow font-medium

@@ -9,7 +9,14 @@ import { MarkdownSection } from "../src/components/common/MarkdownSection";
 import WindowScrollProgres from "../src/components/common/WindowScrollProgres";
 import { SectionContextProvider } from "../src/components/context/SectionInViewContext";
 import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
-import MobileNav, { NavigationSections } from "../src/layout/MobileNav";
+import useMatchMaxWidth from "../src/hooks/useMatchMaxWidth";
+import SideNav from "../src/components/desktop/SideNav/SideNav";
+import BottomNavContainer from "../src/components/mobile/BottomNav/BottomNavContainer";
+import { BottomNavAction } from "../src/components/mobile/BottomNav";
+import { CirclePersonIcon, ResumeIcon, WorkerIcon } from "../src/icons";
+import { useState } from "react";
+import SideNavAction from "../src/components/desktop/SideNav/SideNavAction";
+import classNames from "classnames";
 
 export async function getStaticProps() {
   let aboutMeSection;
@@ -42,6 +49,20 @@ interface HomePageProps {
 }
 
 const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
+  const isMobile = useMatchMaxWidth("600px");
+  const [activeSectionId, setActiveSectionId] = useState<string>();
+
+  const scroolToViewById = (elementId: string, scroolYOffset = -50) => {
+    const element = document.querySelector(`#${elementId}`);
+
+    if (!element) return;
+
+    const y =
+      element.getBoundingClientRect().top + window.pageYOffset + scroolYOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
   return (
     <div>
       <Head>
@@ -50,30 +71,68 @@ const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <WindowScrollProgres />
-      <Banner title="Hi I'm Ernest, a web developer" />
-      <SectionContextProvider selectActiveSection={selectElementVisableInBottom}>
-        <div className="m-7 overflow-hidden">
-          {aboutMeSection && (
-            <Section
-              title={aboutMeSection.data.title}
-              name={NavigationSections.AboutMe}
-            >
-              <MarkdownSection content={aboutMeSection.content} />
-            </Section>
-          )}
-          {aboutMeSection && (
-            <Section title={"Projects"} name={NavigationSections.Projects}>
-              <MarkdownSection content={aboutMeSection.content} />
-            </Section>
-          )}
-          {aboutMeSection && (
-            <Section title={"Contact"} name={NavigationSections.Contact}>
-              <MarkdownSection content={aboutMeSection.content} />
-            </Section>
-          )}
+      <div
+        className={classNames("flex", {
+          "flex-col": isMobile,
+          "flex-row-reverse": !isMobile,
+        })}
+      >
+        <div className="flex-grow">
+          <Banner title="Hi I'm Ernest, a web developer" />
+          <SectionContextProvider
+            selectActiveSection={selectElementVisableInBottom}
+            onActiveSectionChange={(sectionId) => setActiveSectionId(sectionId)}
+          >
+            <div className="p-7 overflow-hidden">
+              {aboutMeSection && (
+                <Section title={aboutMeSection.data.title} name={"AboutMe"}>
+                  <MarkdownSection content={aboutMeSection.content} />
+                </Section>
+              )}
+              {aboutMeSection && (
+                <Section title={"Projects"} name={"Projects"}>
+                  <MarkdownSection content={aboutMeSection.content} />
+                </Section>
+              )}
+              {aboutMeSection && (
+                <Section title={"Contact"} name={"Contact"}>
+                  <MarkdownSection content={aboutMeSection.content} />
+                </Section>
+              )}
+            </div>
+          </SectionContextProvider>
         </div>
-      <MobileNav/>
-      </SectionContextProvider>
+        {isMobile ? (
+          <BottomNavContainer>
+            <BottomNavAction
+              icon={<CirclePersonIcon />}
+              label="AboutMe"
+              isActive={activeSectionId == "AboutMe"}
+              action={() => scroolToViewById("AboutMe")}
+            />
+            <BottomNavAction
+              icon={<WorkerIcon />}
+              label="Projects"
+              isActive={activeSectionId == "Projects"}
+              action={() => scroolToViewById("Projects")}
+            />
+            <BottomNavAction
+              icon={<ResumeIcon />}
+              label="Contact"
+              isActive={activeSectionId == "Contact"}
+              action={() => scroolToViewById("Contact")}
+            />
+          </BottomNavContainer>
+        ) : (
+          <SideNav>
+            <SideNavAction
+              label="AboutMe"
+              isActive={activeSectionId == "AboutMe"}
+              action={() => scroolToViewById("AboutMe")}
+            />
+          </SideNav>
+        )}
+      </div>
     </div>
   );
 };
