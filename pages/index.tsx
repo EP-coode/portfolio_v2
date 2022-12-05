@@ -41,7 +41,7 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
   aboutMeSection,
 }) => {
   const displayMobileNav = useMatchMaxWidth("600px");
-  const [activeSectionId, setActiveSectionId] = useState<string>();
+  const [activeSectionId, setActiveSectionId] = useState<string | null>();
   const Nav = displayMobileNav ? BottomNav : SideNav;
 
   return (
@@ -61,27 +61,27 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
         <div className="flex-grow">
           <Banner title="Hi I'm Ernest, a web developer" />
           <TrackableSectionContainer
-            selectActiveSection={selectElementVisableInBottom}
+            activeSectionSelectionStrategy={selectElementVisableInBottom}
             onActiveSectionChange={(sectionId) => setActiveSectionId(sectionId)}
           >
             <div className="p-7 pb-24 overflow-hidden">
               {aboutMeSection && (
-                <TrackableSection id={"AboutMe"}>
-                  <Section title={"AboutMe"}>
+                <TrackableSection id="AboutMe">
+                  <Section title="AboutMe">
                     <MarkdownSection content={aboutMeSection.content} />
                   </Section>
                 </TrackableSection>
               )}
               {aboutMeSection && (
-                <TrackableSection id={"Projects"}>
-                  <Section title={"Projects"}>
+                <TrackableSection id="Projects">
+                  <Section title="Projects">
                     <MarkdownSection content={aboutMeSection.content} />
                   </Section>
                 </TrackableSection>
               )}
               {aboutMeSection && (
-                <TrackableSection id={"Contact"}>
-                  <Section title={"Contact"}>
+                <TrackableSection id="Contact">
+                  <Section title="Contact">
                     <MarkdownSection content={aboutMeSection.content} />
                   </Section>
                 </TrackableSection>

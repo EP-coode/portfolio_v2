@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { SectionContext } from "./TrackableSectionContainer";
-import useIsInViewport from "../../hooks/useIsInViewport";
 
 type SectionProps = {
   id: string;
@@ -9,13 +8,11 @@ type SectionProps = {
 
 export const TrackableSection = ({ children, id }: SectionProps) => {
   const secrionRef = useRef<HTMLElement>(null);
-  const [isInViewPort,] = useIsInViewport(secrionRef, "-100px");
   const sectionCtx = useContext(SectionContext);
 
   useEffect(() => {
-    if (isInViewPort) sectionCtx?.onSectionEnter?.(secrionRef);
-    else sectionCtx?.onSectionLeave?.(secrionRef);
-  }, [isInViewPort]);
+    sectionCtx?.registerSection(id, secrionRef);
+  }, [secrionRef, sectionCtx?.registerSection]);
 
   return (
     <section

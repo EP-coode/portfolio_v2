@@ -1,14 +1,21 @@
-export const selectElementVisableInBottom = (
-  sectionsRef: React.RefObject<HTMLElement>[]
-): React.RefObject<HTMLElement> | undefined => {
-  const sortedRefs = sectionsRef.sort((section1, section2) => {
-    const el1YPos = section1.current?.getBoundingClientRect().y ?? 0;
-    const el2YPos = section2.current?.getBoundingClientRect().y ?? 0;
+import { ActiveSectionSelectionStrategy } from "../components/trackableSection/TrackableSectionContainer";
 
-    if (el1YPos < el2YPos) return 1;
-    else if (el1YPos > el2YPos) return -1;
-    else return 0;
-  });
+export const selectElementVisableInBottom: ActiveSectionSelectionStrategy = (
+  registeredSections,
+  visableSections
+) => {
+  const sortedRefsAndIds = Object.entries(registeredSections)
+    .filter(([sectionId]) => visableSections.has(sectionId))
+    .sort(([, section1], [, section2]) => {
+      const el1YPos = section1.current?.getBoundingClientRect().y ?? 0;
+      const el2YPos = section2.current?.getBoundingClientRect().y ?? 0;
 
-  return sortedRefs[0];
+      if (el1YPos < el2YPos) return 1;
+      else if (el1YPos > el2YPos) return -1;
+      else return 0;
+    });
+
+  if (sortedRefsAndIds.length == 0) return null;
+  
+  return sortedRefsAndIds[0][0];
 };
