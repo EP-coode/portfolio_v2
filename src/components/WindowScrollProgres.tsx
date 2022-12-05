@@ -1,5 +1,5 @@
 import React from 'react'
-import useScrollPrgores from '../../hooks/useScrollPrgores'
+import useScrollPrgores from '../hooks/useScrollPrgores'
 import ProggresBar from './ProgresBar'
 
 const WindowScrollProgres = () => {

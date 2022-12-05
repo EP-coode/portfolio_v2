@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-import bannerImage from "../../../public/images/banner.webp";
+import bannerImage from "../../public/images/banner.webp";
 
 type Props = {
   title: string;

@@ -4,10 +4,9 @@ import matter from "gray-matter";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import { BottomNavContainer, BottomNavAction } from "../src/components";
+import { SideNav, BottomNav } from "../src/components/nav";
 import Banner from "../src/components/Banner";
 import { MarkdownSection } from "../src/components/MarkdownSection";
-import SideNav from "../src/components/SideNav";
 import SideNavAction from "../src/components/nav/SideNavAction";
 import WindowScrollProgres from "../src/components/WindowScrollProgres";
 import { SectionContextProvider } from "../src/context/SectionInViewContext";
@@ -15,7 +14,6 @@ import useMatchMaxWidth from "../src/hooks/useMatchMaxWidth";
 import { CirclePersonIcon, WorkerIcon, ResumeIcon } from "../src/icons";
 import Section from "../src/layout/Section";
 import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
-
 
 export async function getStaticProps() {
   let aboutMeSection;
@@ -48,8 +46,9 @@ interface HomePageProps {
 }
 
 const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
-  const isMobile = useMatchMaxWidth("600px");
+  const displayMobileNav = useMatchMaxWidth("600px");
   const [activeSectionId, setActiveSectionId] = useState<string>();
+  const Nav = displayMobileNav ? BottomNav : SideNav;
 
   const scroolToViewById = (elementId: string, scroolYOffset = -50) => {
     const element = document.querySelector(`#${elementId}`);
@@ -72,8 +71,8 @@ const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
       <WindowScrollProgres />
       <div
         className={classNames("flex", {
-          "flex-col": isMobile,
-          "flex-row-reverse": !isMobile,
+          "flex-col": displayMobileNav,
+          "flex-row-reverse": !displayMobileNav,
         })}
       >
         <div className="flex-grow">
@@ -101,46 +100,28 @@ const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
             </div>
           </SectionContextProvider>
         </div>
-        {isMobile ? (
-          <BottomNavContainer>
-            <BottomNavAction
-              icon={<CirclePersonIcon />}
-              label="AboutMe"
-              isActive={activeSectionId == "AboutMe"}
-              action={() => scroolToViewById("AboutMe")}
-            />
-            <BottomNavAction
-              icon={<WorkerIcon />}
-              label="Projects"
-              isActive={activeSectionId == "Projects"}
-              action={() => scroolToViewById("Projects")}
-            />
-            <BottomNavAction
-              icon={<ResumeIcon />}
-              label="Contact"
-              isActive={activeSectionId == "Contact"}
-              action={() => scroolToViewById("Contact")}
-            />
-          </BottomNavContainer>
-        ) : (
-          <SideNav>
-            <SideNavAction
-              label="AboutMe"
-              isActive={activeSectionId == "AboutMe"}
-              action={() => scroolToViewById("AboutMe")}
-            />
-            <SideNavAction
-              label="Projects"
-              isActive={activeSectionId == "Projects"}
-              action={() => scroolToViewById("Projects")}
-            />
-            <SideNavAction
-              label="Contact"
-              isActive={activeSectionId == "Contact"}
-              action={() => scroolToViewById("Contact")}
-            />
-          </SideNav>
-        )}
+        <Nav
+          actions={[
+            {
+              icon: <CirclePersonIcon />,
+              label: "AboutMe",
+              isActive: activeSectionId == "AboutMe",
+              action: () => scroolToViewById("AboutMe"),
+            },
+            {
+              icon: <WorkerIcon />,
+              label: "Projects",
+              isActive: activeSectionId == "Projects",
+              action: () => scroolToViewById("Projects"),
+            },
+            {
+              icon: <CirclePersonIcon />,
+              label: "Contact",
+              isActive: activeSectionId == "Contact",
+              action: () => scroolToViewById("Contact"),
+            },
+          ]}
+        ></Nav>
       </div>
     </div>
   );

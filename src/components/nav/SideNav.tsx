@@ -3,14 +3,11 @@ import Image from "next/image";
 import React from "react";
 
 import logo from "../../../public/images/logo.png";
-import { LinkedInLogo, GitHubLogo } from "../icons";
+import { LinkedInLogo, GitHubLogo } from "../../icons";
+import { NavProps } from ".";
+import SideNavAction from "./SideNavAction";
 
-type Props = {
-  children: React.ReactNode;
-  onLogoClick?: () => void;
-};
-
-const SideNav = ({ children, onLogoClick }: Props) => (
+export const SideNav = ({ actions, onLogoClick }: NavProps) => (
   <nav className="w-40 h-screen sticky top-0 left-0 bg-gray-light flex-grow-0 flex-shrink-0 z-20 flex flex-col">
     <div
       onClick={onLogoClick}
@@ -23,7 +20,17 @@ const SideNav = ({ children, onLogoClick }: Props) => (
         Ernest Przybył
       </h2>
     </div>
-    <nav className="flex-grow flex flex-col justify-center overflow-hidden">{children}</nav>
+    <nav className="flex-grow flex flex-col justify-center overflow-hidden">
+      {actions.map(({ icon, label, isActive, action }) => (
+        <SideNavAction
+          label={label}
+          isActive={isActive}
+          action={action}
+          icon={icon}
+          key={label}
+        />
+      ))}
+    </nav>
     <div className="py-10 px-7">
       <div className="h-6 w-100 text-white flex flex-row justify-around">
         <a
@@ -46,5 +53,3 @@ const SideNav = ({ children, onLogoClick }: Props) => (
     </div>
   </nav>
 );
-
-export default SideNav;

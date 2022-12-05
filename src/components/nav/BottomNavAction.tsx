@@ -1,20 +1,13 @@
 import classNames from "classnames";
-import { useContext } from "react";
-import { SectionContext } from "../../context/SectionInViewContext";
+import { NavActionProps } from ".";
 
-type BottomNavActionProps = {
-  label: string;
-  icon: React.ReactNode;
-  action?: () => void;
-  isActive?: boolean;
-};
 
 export default function BottomNavAction({
   label,
   icon,
   action,
   isActive = false,
-}: BottomNavActionProps) {
+}: NavActionProps) {
   return (
     <div
       className={classNames(

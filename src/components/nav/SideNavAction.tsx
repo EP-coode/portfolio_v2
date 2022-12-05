@@ -1,13 +1,9 @@
 import classNames from "classnames";
 import React from "react";
+import { NavActionProps } from ".";
 
-type Props = {
-  label: string;
-  isActive: boolean;
-  action: () => void;
-};
 
-const SideNavAction = ({ label, isActive, action }: Props) => {
+const SideNavAction = ({ label, isActive, action }: NavActionProps) => {
   return (
     <button
       onClick={action}
