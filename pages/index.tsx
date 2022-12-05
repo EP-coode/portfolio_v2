@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import type { InferGetServerSidePropsType, NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import { SideNav, BottomNav } from "../src/components/nav";
+import { SideNav, BottomNav } from "../src/components/navigation";
 import Banner from "../src/components/Banner";
 import { MarkdownSection } from "../src/components/MarkdownSection";
 import WindowScrollProgres from "../src/components/WindowScrollProgres";
