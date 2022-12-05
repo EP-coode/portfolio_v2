@@ -14,7 +14,6 @@ import { CirclePersonIcon, WorkerIcon } from "../src/icons";
 import { TrackableSection } from "../src/components/trackableSection/TrackableSection";
 import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
 import { scroolIntoViewById } from "../src/utils/scroolIntoViewById";
-import SlideLeft from "../src/transitions/SlideLeft";
 import { Section } from "../src/components/Section";
 
 export async function getStaticProps() {
