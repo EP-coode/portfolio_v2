@@ -28,7 +28,24 @@ export const SectionContext = createContext<SectionContext>(
   defaultSectionInViewContext
 );
 
-export const SectionContextProvider = ({
+/**
+ * Thist sollution has realy bad complexity
+ * Bigger ammunt of elements in viewport may caouse 
+ * performance issues
+ * I was unable to get references to those objects
+ * I was trying:
+ * * using querySelectorAll to get childs to track
+ *   This one won't work becouse childrens can update
+ * * Children.map(children,...)
+ *   This one won't work becaouse you need extra DOM element
+ *   to wrap each children and get reference. May caouse unwanted
+ *   problems with styling and others. (child props can't be mutated
+ *   to pass merged references)
+ *   This will also allow only first layer of children in tree to 
+ *   be tracked.
+ * 
+ */
+export const TrackableSectionContainer = ({
   children,
   selectActiveSection,
   onActiveSectionChange,

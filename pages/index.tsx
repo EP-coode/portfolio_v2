@@ -8,12 +8,14 @@ import { SideNav, BottomNav } from "../src/components/navigation";
 import Banner from "../src/components/Banner";
 import { MarkdownSection } from "../src/components/MarkdownSection";
 import WindowScrollProgres from "../src/components/WindowScrollProgres";
-import { SectionContextProvider } from "../src/context/SectionInViewContext";
+import { TrackableSectionContainer } from "../src/components/trackableSection/TrackableSectionContainer";
 import useMatchMaxWidth from "../src/hooks/useMatchMaxWidth";
 import { CirclePersonIcon, WorkerIcon } from "../src/icons";
-import Section from "../src/layout/Section";
+import { TrackableSection } from "../src/components/trackableSection/TrackableSection";
 import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
 import { scroolIntoViewById } from "../src/utils/scroolIntoViewById";
+import SlideLeft from "../src/transitions/SlideLeft";
+import { Section } from "../src/components/Section";
 
 export async function getStaticProps() {
   let aboutMeSection;
@@ -36,9 +38,9 @@ export async function getStaticProps() {
   };
 }
 
-const Home: NextPage<
-  InferGetServerSidePropsType<typeof getStaticProps>
-> = ({ aboutMeSection }) => {
+const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
+  aboutMeSection,
+}) => {
   const displayMobileNav = useMatchMaxWidth("600px");
   const [activeSectionId, setActiveSectionId] = useState<string>();
   const Nav = displayMobileNav ? BottomNav : SideNav;
@@ -59,28 +61,34 @@ const Home: NextPage<
       >
         <div className="flex-grow">
           <Banner title="Hi I'm Ernest, a web developer" />
-          <SectionContextProvider
+          <TrackableSectionContainer
             selectActiveSection={selectElementVisableInBottom}
             onActiveSectionChange={(sectionId) => setActiveSectionId(sectionId)}
           >
             <div className="p-7 pb-24 overflow-hidden">
               {aboutMeSection && (
-                <Section title={aboutMeSection.data.title} name={"AboutMe"}>
-                  <MarkdownSection content={aboutMeSection.content} />
-                </Section>
+                <TrackableSection id={"AboutMe"}>
+                  <Section title={"AboutMe"}>
+                    <MarkdownSection content={aboutMeSection.content} />
+                  </Section>
+                </TrackableSection>
               )}
               {aboutMeSection && (
-                <Section title={"Projects"} name={"Projects"}>
-                  <MarkdownSection content={aboutMeSection.content} />
-                </Section>
+                <TrackableSection id={"Projects"}>
+                  <Section title={"Projects"}>
+                    <MarkdownSection content={aboutMeSection.content} />
+                  </Section>
+                </TrackableSection>
               )}
               {aboutMeSection && (
-                <Section title={"Contact"} name={"Contact"}>
-                  <MarkdownSection content={aboutMeSection.content} />
-                </Section>
+                <TrackableSection id={"Contact"}>
+                  <Section title={"Contact"}>
+                    <MarkdownSection content={aboutMeSection.content} />
+                  </Section>
+                </TrackableSection>
               )}
             </div>
-          </SectionContextProvider>
+          </TrackableSectionContainer>
         </div>
         <Nav
           actions={[
