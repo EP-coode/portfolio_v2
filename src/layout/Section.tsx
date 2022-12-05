@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { SectionContext } from "../components/context/SectionInViewContext";
+import { SectionContext } from "../context/SectionInViewContext";
 import useIsInViewport from "../hooks/useIsInViewport";
 import SlideLeft from "../transitions/SlideLeft";
 

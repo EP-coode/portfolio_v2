@@ -1,22 +1,21 @@
+import fs from "fs";
+import classNames from "classnames";
+import matter from "gray-matter";
 import type { NextPage } from "next";
 import Head from "next/head";
-import fs from "fs";
-import matter from "gray-matter";
-
-import Banner from "../src/components/common/Banner";
-import Section from "../src/layout/Section";
-import { MarkdownSection } from "../src/components/common/MarkdownSection";
-import WindowScrollProgres from "../src/components/common/WindowScrollProgres";
-import { SectionContextProvider } from "../src/components/context/SectionInViewContext";
-import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
-import useMatchMaxWidth from "../src/hooks/useMatchMaxWidth";
-import SideNav from "../src/components/desktop/SideNav";
-import BottomNavContainer from "../src/components/mobile/BottomNavContainer";
-import { BottomNavAction } from "../src/components/mobile";
-import { CirclePersonIcon, ResumeIcon, WorkerIcon } from "../src/icons";
 import { useState } from "react";
-import SideNavAction from "../src/components/desktop/SideNavAction";
-import classNames from "classnames";
+import { BottomNavContainer, BottomNavAction } from "../src/components";
+import Banner from "../src/components/Banner";
+import { MarkdownSection } from "../src/components/MarkdownSection";
+import SideNav from "../src/components/SideNav";
+import SideNavAction from "../src/components/nav/SideNavAction";
+import WindowScrollProgres from "../src/components/WindowScrollProgres";
+import { SectionContextProvider } from "../src/context/SectionInViewContext";
+import useMatchMaxWidth from "../src/hooks/useMatchMaxWidth";
+import { CirclePersonIcon, WorkerIcon, ResumeIcon } from "../src/icons";
+import Section from "../src/layout/Section";
+import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
+
 
 export async function getStaticProps() {
   let aboutMeSection;

@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 import logo from "../../../public/images/logo.png";
-import { LinkedInLogo, GitHubLogo } from "../../icons";
+import { LinkedInLogo, GitHubLogo } from "../icons";
 
 type Props = {
   children: React.ReactNode;
