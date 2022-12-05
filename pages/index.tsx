@@ -13,6 +13,7 @@ import useMatchMaxWidth from "../src/hooks/useMatchMaxWidth";
 import { CirclePersonIcon, WorkerIcon } from "../src/icons";
 import Section from "../src/layout/Section";
 import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
+import { scroolIntoViewById } from "../src/utils/scroolIntoViewById";
 
 export async function getStaticProps() {
   let aboutMeSection;
@@ -41,17 +42,6 @@ const Home: NextPage<
   const displayMobileNav = useMatchMaxWidth("600px");
   const [activeSectionId, setActiveSectionId] = useState<string>();
   const Nav = displayMobileNav ? BottomNav : SideNav;
-
-  const scroolToViewById = (elementId: string, scroolYOffset = -50) => {
-    const element = document.querySelector(`#${elementId}`);
-
-    if (!element) return;
-
-    const y =
-      element.getBoundingClientRect().top + window.pageYOffset + scroolYOffset;
-
-    window.scrollTo({ top: y, behavior: "smooth" });
-  };
 
   return (
     <div>
@@ -98,19 +88,19 @@ const Home: NextPage<
               icon: <CirclePersonIcon />,
               label: "AboutMe",
               isActive: activeSectionId == "AboutMe",
-              action: () => scroolToViewById("AboutMe"),
+              action: () => scroolIntoViewById("AboutMe"),
             },
             {
               icon: <WorkerIcon />,
               label: "Projects",
               isActive: activeSectionId == "Projects",
-              action: () => scroolToViewById("Projects"),
+              action: () => scroolIntoViewById("Projects"),
             },
             {
               icon: <CirclePersonIcon />,
               label: "Contact",
               isActive: activeSectionId == "Contact",
-              action: () => scroolToViewById("Contact"),
+              action: () => scroolIntoViewById("Contact"),
             },
           ]}
         ></Nav>
