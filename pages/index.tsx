@@ -1,17 +1,16 @@
 import fs from "fs";
 import classNames from "classnames";
 import matter from "gray-matter";
-import type { NextPage } from "next";
+import type { InferGetServerSidePropsType, NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import { SideNav, BottomNav } from "../src/components/nav";
 import Banner from "../src/components/Banner";
 import { MarkdownSection } from "../src/components/MarkdownSection";
-import SideNavAction from "../src/components/nav/SideNavAction";
 import WindowScrollProgres from "../src/components/WindowScrollProgres";
 import { SectionContextProvider } from "../src/context/SectionInViewContext";
 import useMatchMaxWidth from "../src/hooks/useMatchMaxWidth";
-import { CirclePersonIcon, WorkerIcon, ResumeIcon } from "../src/icons";
+import { CirclePersonIcon, WorkerIcon } from "../src/icons";
 import Section from "../src/layout/Section";
 import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
 
@@ -36,16 +35,9 @@ export async function getStaticProps() {
   };
 }
 
-interface HomePageProps {
-  aboutMeSection?: {
-    data: {
-      title: string;
-    };
-    content: any;
-  };
-}
-
-const Home: NextPage<HomePageProps> = ({ aboutMeSection }) => {
+const Home: NextPage<
+  InferGetServerSidePropsType<typeof getStaticProps>
+> = ({ aboutMeSection }) => {
   const displayMobileNav = useMatchMaxWidth("600px");
   const [activeSectionId, setActiveSectionId] = useState<string>();
   const Nav = displayMobileNav ? BottomNav : SideNav;
