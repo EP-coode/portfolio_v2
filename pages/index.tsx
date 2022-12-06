@@ -42,7 +42,7 @@ export async function getStaticProps() {
 const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
   aboutMeSection,
 }) => {
-  const displayMobileNav = useMatchMaxWidth("600px");
+  const displayMobileNav = useMatchMaxWidth("800px");
   const [activeSectionId, setActiveSectionId] = useState<string | null>();
   const Nav = displayMobileNav ? BottomNav : SideNav;
 

@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { plainToClass, plainToInstance } from "class-transformer";
-import { IsEmail, IsNotEmpty, IsString, validate } from "class-validator";
+import { plainToClass } from "class-transformer";
+import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 import { NextApiRequest,  NextApiResponse} from "next";
 import nodemailer from "nodemailer";
 

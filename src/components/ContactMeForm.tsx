@@ -64,12 +64,12 @@ export const ContactMeForm = () => {
     >
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">Your name</span>
+          <span className="label-text">Name</span>
         </label>
         <input
           id="name"
           type="text"
-          placeholder="Type here"
+          placeholder="Your name or your company"
           className={classNames("input input-bordered w-full", {
             "input-error": formik.errors.name,
           })}
@@ -89,7 +89,7 @@ export const ContactMeForm = () => {
         <input
           id="email"
           type="email"
-          placeholder="Type here"
+          placeholder="example@example.com"
           className={classNames("input input-bordered w-full", {
             "input-error": formik.errors.email,
           })}
@@ -111,7 +111,7 @@ export const ContactMeForm = () => {
           className={classNames("textarea textarea-bordered grow", {
             "textarea-error": formik.errors.content,
           })}
-          placeholder="Bio"
+          placeholder="Type your message here ..."
           value={formik.values.content}
           onChange={formik.handleChange}
         ></textarea>
