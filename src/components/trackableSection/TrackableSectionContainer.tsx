@@ -84,8 +84,6 @@ export const TrackableSectionContainer = ({
       visableScetionsIds
     );
     onActiveSectionChange(newActiveSection);
-    console.log("visableScetionsIds", visableScetionsIds);
-    console.log("newActiveSection", newActiveSection);
   }, [visableScetionsIds, registeredSections]);
 
   return (
