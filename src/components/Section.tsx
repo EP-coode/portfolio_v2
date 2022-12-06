@@ -11,10 +11,10 @@ export const Section = ({
 
   return (
     <SlideLeft slidedIn={wasInViewport} ref={contenRef}>
-      <h2 className="text-white text-3xl font-bold">{title}</h2>
-      <div>
-        {children}
-      </div>
+      <section className="my-10">
+        <h2 className="text-white text-3xl font-bold">{title}</h2>
+        <div>{children}</div>
+      </section>
     </SlideLeft>
   );
 };

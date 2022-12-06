@@ -13,18 +13,25 @@ module.exports = {
         "gray-light": "#353535",
         "gray-dark": "#272727",
       },
-      typography: ({ theme }) => ({
-        white: {
-          css: {
-            "--tw-prose-body": theme("colors.white"),
-            "--tw-prose-headings": theme("colors.white"),
-            "--tw-prose-lead": theme("colors.white"),
-            "--tw-prose-links": theme("colors.white"),
-            "--tw-prose-bold": theme("colors.white"),
-          },
-        },
-      }),
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          primary: "#06b6d4",
+          secondary: "#D926A9",
+          accent: "#1FB2A6",
+          neutral: "#191D24",
+          "base-100": "#272727",
+          "base-200": "#353535",
+          info: "#3ABFF8",
+          success: "#36D399",
+          warning: "#FBBD23",
+          error: "#F87272",
+        },
+      },
+    ],
+  },
 };
