@@ -48,21 +48,24 @@ export const TrackableSectionContainer = ({
   );
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([firstEntry]) => {
-      if (firstEntry.isIntersecting) {
-        setVisableSectionsIds(
-          (prev) => new Set(prev.add(firstEntry.target.id))
-        );
-      } else {
-        setVisableSectionsIds((prev) => {
-          const newValue = new Set(prev);
-          newValue.delete(firstEntry.target.id);
-          return newValue;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisableSectionsIds((prev) => new Set(prev.add(entry.target.id)));
+          } else {
+            setVisableSectionsIds((prev) => {
+              const newValue = new Set(prev);
+              newValue.delete(entry.target.id);
+              return newValue;
+            });
+          }
         });
+      },
+      {
+        rootMargin: "0px 0px -100px",
       }
-    }, {
-      rootMargin: "0px 0px -100px"
-    });
+    );
 
     Object.entries(registeredSections).forEach(([, sectionRef]) => {
       if (sectionRef.current != null) {
@@ -81,6 +84,8 @@ export const TrackableSectionContainer = ({
       visableScetionsIds
     );
     onActiveSectionChange(newActiveSection);
+    console.log("visableScetionsIds", visableScetionsIds);
+    console.log("newActiveSection", newActiveSection);
   }, [visableScetionsIds, registeredSections]);
 
   return (
