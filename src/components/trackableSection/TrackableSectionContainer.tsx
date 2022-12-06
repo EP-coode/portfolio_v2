@@ -63,7 +63,7 @@ export const TrackableSectionContainer = ({
         });
       },
       {
-        rootMargin: "0px 0px -100px",
+        rootMargin: "0px 0px -150px",
       }
     );
 
