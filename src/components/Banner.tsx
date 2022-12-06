@@ -12,7 +12,7 @@ export default function Banner({ title }: Props) {
     <div className="h-screen relative">
       <h1
         className="
-          text-center text-white text-4xl xs:text-6xl text-shadow font-medium
+          text-center text-white text-4xl xs:text-6xl text-shadow font-bold
           w-full p-7 pb-32 z-10
           absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
       "
