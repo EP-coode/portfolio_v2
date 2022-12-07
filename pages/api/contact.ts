@@ -34,10 +34,10 @@ export default async function handler(
     const data = plainToClass(ContactMeDto, JSON.parse(req.body));
     const errors = await validate(data);
 
-    if (errors.length >0) {
+    if (errors.length > 0) {
       res.status(400).send(errors);
     } else {
-      mailClient.sendMail({
+      await mailClient.sendMail({
         sender: data.email,
         replyTo: data.email,
         to: process.env.TARGET_MAIL,
