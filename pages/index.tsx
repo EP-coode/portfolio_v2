@@ -164,8 +164,8 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
               </div>
             </TrackableSectionContainer>
           </div>
-          <BottomNav actions={navActions} className="md:invisible"></BottomNav>
-          <SideNav actions={navActions} className="invisible md:visible"></SideNav>
+          <BottomNav actions={navActions} className="md:hidden"></BottomNav>
+          <SideNav actions={navActions} className="hidden md:flex"></SideNav>
         </div>
       </ModalContextProvider>
     </div>
