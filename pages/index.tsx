@@ -1,7 +1,11 @@
 import fs from "fs";
 import classNames from "classnames";
 import matter from "gray-matter";
-import type { InferGetServerSidePropsType, NextPage } from "next";
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from "next";
 import Head from "next/head";
 import { useState } from "react";
 import { SideNav, BottomNav } from "../src/components/navigation";
@@ -18,18 +22,25 @@ import { Section } from "../src/components/Section";
 import { ContactMeForm } from "../src/components/ContactMeForm";
 import { ModalContextProvider } from "../src/context/ModalContext";
 
-export async function getStaticProps() {
+type IndexPageProps = {
+  aboutMeSection: { content: string; data: { title: string } };
+};
+
+export const getStaticProps: GetServerSideProps<IndexPageProps> = async () => {
   let aboutMeSection;
 
   try {
     const readFile = fs.readFileSync(`content/aboutme.md`, "utf-8");
     const { data, content } = matter(readFile);
     aboutMeSection = {
-      data,
+      data: data as { title: string },
       content,
     };
   } catch (e) {
     console.error(e);
+    return {
+      notFound: true,
+    };
   }
 
   return {
@@ -37,7 +48,7 @@ export async function getStaticProps() {
       aboutMeSection,
     },
   };
-}
+};
 
 const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
   aboutMeSection,
@@ -84,13 +95,11 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
                     </Section>
                   </TrackableSection>
                 )}
-                {aboutMeSection && (
-                  <TrackableSection id="Contact">
-                    <Section title="Contact">
-                      <ContactMeForm />
-                    </Section>
-                  </TrackableSection>
-                )}
+                <TrackableSection id="Contact">
+                  <Section title="Contact">
+                    <ContactMeForm />
+                  </Section>
+                </TrackableSection>
               </div>
             </TrackableSectionContainer>
           </div>
