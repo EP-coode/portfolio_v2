@@ -1,11 +1,11 @@
 ---
-id: example_proj
+id: example_proj_2
 title: Example Proj
-images: ["https://placeimg.com/400/225/arch"]
+images: ["https://placeimg.com/600/225/arch"]
 technologies: ["JS", "TS", "React", "TailwindCSS"]
 teaser: Simple porject made with typescript.
 repo_link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-live_sample_link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+live_sample_link:
 ---
 
 # Loqui potestis negabo Mavortius liquerat

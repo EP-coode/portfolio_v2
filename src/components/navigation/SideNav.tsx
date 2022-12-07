@@ -3,9 +3,10 @@ import Image from "next/image";
 import React from "react";
 
 import logo from "../../../public/images/logo.png";
-import { LinkedInLogo, GitHubLogo } from "../../icons";
 import { NavProps } from ".";
 import SideNavAction from "./SideNavAction";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export const SideNav = ({ actions, onLogoClick }: NavProps) => (
   <nav className="w-40 h-screen sticky top-0 left-0 bg-gray-light flex-grow-0 flex-shrink-0 z-20 flex flex-col">
@@ -39,7 +40,7 @@ export const SideNav = ({ actions, onLogoClick }: NavProps) => (
           href="https://www.linkedin.com/in/ernestprzybyl"
           rel="noopener noreferrer"
         >
-          <LinkedInLogo />
+          <FontAwesomeIcon icon={faLinkedin} className="h-full" />
         </a>
         <a
           className="hover:scale-110"
@@ -47,7 +48,7 @@ export const SideNav = ({ actions, onLogoClick }: NavProps) => (
           href="https://github.com/EP-coode"
           rel="noopener noreferrer"
         >
-          <GitHubLogo />
+          <FontAwesomeIcon icon={faGithub} className="h-full" />
         </a>
       </div>
     </div>

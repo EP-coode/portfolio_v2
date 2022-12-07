@@ -1,4 +1,4 @@
-import fs from "fs";
+import { promises as fs } from "fs";
 import classNames from "classnames";
 import matter from "gray-matter";
 import type {
@@ -21,21 +21,49 @@ import { scroolIntoViewById } from "../src/utils/scroolIntoViewById";
 import { Section } from "../src/components/Section";
 import { ContactMeForm } from "../src/components/ContactMeForm";
 import { ModalContextProvider } from "../src/context/ModalContext";
+import { Project } from "../src/model/Project";
+import { ProjectCard } from "../src/components/project/ProjectCard";
+import { ProjectContainer } from "../src/components/project/ProjectContainer";
 
 type IndexPageProps = {
   aboutMeSection: { content: string; data: { title: string } };
+  projects: Project[];
 };
 
 export const getStaticProps: GetServerSideProps<IndexPageProps> = async () => {
   let aboutMeSection;
+  let projects: Project[] = [];
 
   try {
-    const readFile = fs.readFileSync(`content/aboutme.md`, "utf-8");
+    const readFile = await fs.readFile(`content/aboutme.md`, "utf-8");
     const { data, content } = matter(readFile);
     aboutMeSection = {
       data: data as { title: string },
       content,
     };
+
+    const projectsDir = await fs.readdir("content/projects");
+
+    projects = await Promise.all(
+      projectsDir.map(async (fileName) => {
+        const readFile = await fs.readFile(
+          `content/projects/${fileName}`,
+          "utf-8"
+        );
+        const { data, content } = matter(readFile);
+        const project: Project = {
+          id: data.id ?? null,
+          title: data.title ?? null,
+          images: data.images ?? null,
+          live_sample_link: data.live_sample_link ?? null,
+          repo_link: data.repo_link ?? null,
+          teaser: data.teaser ?? null,
+          technologies: data.technologies ?? null,
+          content,
+        };
+        return project;
+      })
+    );
   } catch (e) {
     console.error(e);
     return {
@@ -46,12 +74,14 @@ export const getStaticProps: GetServerSideProps<IndexPageProps> = async () => {
   return {
     props: {
       aboutMeSection,
+      projects,
     },
   };
 };
 
 const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
   aboutMeSection,
+  projects,
 }) => {
   const displayMobileNav = useMatchMaxWidth("800px");
   const [activeSectionId, setActiveSectionId] = useState<string | null>();
@@ -88,13 +118,15 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
                     </Section>
                   </TrackableSection>
                 )}
-                {aboutMeSection && (
-                  <TrackableSection id="Projects">
-                    <Section title="Projects">
-                      <MarkdownSection content={aboutMeSection.content} />
-                    </Section>
-                  </TrackableSection>
-                )}
+                <TrackableSection id="Projects">
+                  <Section title="Projects">
+                    <ProjectContainer>
+                      {projects.map((project) => (
+                        <ProjectCard project={project} key={project.id} />
+                      ))}
+                    </ProjectContainer>
+                  </Section>
+                </TrackableSection>
                 <TrackableSection id="Contact">
                   <Section title="Contact">
                     <ContactMeForm />
