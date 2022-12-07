@@ -28,6 +28,7 @@
     "nodemailer": "^6.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.31.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {

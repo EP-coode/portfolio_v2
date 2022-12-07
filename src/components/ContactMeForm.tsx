@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import * as Yup from "yup";
 import { ModalContext } from "../context/ModalContext";
 
-export const ContactMeForm = () => {
+const ContactMeForm = () => {
   const modalContext = useContext(ModalContext);
 
   const formik = useFormik({
@@ -34,9 +34,10 @@ export const ContactMeForm = () => {
         body: JSON.stringify({ content, email, name }),
       });
 
-      if (result.ok)
+      if (result.ok) {
+        formik.resetForm();
         modalContext?.setupModal("Succes", "I will anwser soon.", true, []);
-      else
+      } else
         modalContext?.setupModal(
           "Somenthig went wrong",
           "Try it later",
@@ -45,8 +46,6 @@ export const ContactMeForm = () => {
         );
 
       modalContext?.show();
-
-      formik.resetForm();
       formik.setSubmitting(false);
     },
   });
@@ -135,3 +134,5 @@ export const ContactMeForm = () => {
     </form>
   );
 };
+
+export default ContactMeForm;

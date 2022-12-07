@@ -12,21 +12,22 @@ type Props = {
 
 export const ProjectCard = ({ project }: Props) => {
   return (
-    <div className="flex flex-col relative max-w-xl flex-grow basis-96 bg-base-100 shadow-xl bg-opacity-75 rounded-md overflow-hidden">
+    <div className="flex flex-col relative max-w-xl min-h-[20rem] flex-grow basis-96 bg-base-200 shadow-xl bg-opacity-75 rounded-md overflow-hidden">
       {project.images[0] && (
-        <figure className="-z-10">
+        <figure className="-z-10 absolute w-full h-full">
           <Image
             src={project.images[0]}
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
+            loading="lazy"
           />
         </figure>
       )}
       <div className="card-body">
         <h2 className="card-title">{project.title}</h2>
-        <div>
+        <div className="flex-grow">
           {project.technologies && (
-            <div className="flex gap-1 my-2">
+            <div className="flex gap-1 my-2 flex-wrap">
               {project.technologies.map((tech) => (
                 <span className="badge badge-accent" key={tech}>
                   {tech}

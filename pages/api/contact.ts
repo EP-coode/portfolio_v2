@@ -34,7 +34,7 @@ export default async function handler(
     const data = plainToClass(ContactMeDto, JSON.parse(req.body));
     const errors = await validate(data);
 
-    if (errors) {
+    if (errors.length >0) {
       res.status(400).send(errors);
     } else {
       mailClient.sendMail({

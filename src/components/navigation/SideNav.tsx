@@ -16,7 +16,7 @@ export const SideNav = ({ actions, onLogoClick }: NavProps) => (
         "cursor-pointer": onLogoClick,
       })}
     >
-      <Image src={logo} objectFit="cover" placeholder="blur" />
+      <Image src={logo} objectFit="cover" placeholder="blur" alt="logo" />
       <h2 className="text-white text-center text-2xl font-mono">
         Ernest Przybył
       </h2>
@@ -39,6 +39,7 @@ export const SideNav = ({ actions, onLogoClick }: NavProps) => (
           target="_blank"
           href="https://www.linkedin.com/in/ernestprzybyl"
           rel="noopener noreferrer"
+          aria-label="linkedin"
         >
           <FontAwesomeIcon icon={faLinkedin} className="h-full" />
         </a>
@@ -47,6 +48,7 @@ export const SideNav = ({ actions, onLogoClick }: NavProps) => (
           target="_blank"
           href="https://github.com/EP-coode"
           rel="noopener noreferrer"
+          aria-label="github"
         >
           <FontAwesomeIcon icon={faGithub} className="h-full" />
         </a>

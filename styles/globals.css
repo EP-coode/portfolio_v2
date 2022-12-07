@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
 @layer components {
   .text-shadow {
     text-shadow: 0.3rem 0.3rem 2px theme('colors.gray-light');
