@@ -91,9 +91,28 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
   aboutMeSection,
   projects,
 }) => {
-  const displayMobileNav = useMatchMaxWidth("800px");
   const [activeSectionId, setActiveSectionId] = useState<string | null>();
-  const Nav = displayMobileNav ? BottomNav : SideNav;
+
+  const navActions = [
+    {
+      icon: <CirclePersonIcon />,
+      label: "AboutMe",
+      isActive: activeSectionId == "AboutMe",
+      action: () => scroolIntoViewById("AboutMe"),
+    },
+    {
+      icon: <WorkerIcon />,
+      label: "Projects",
+      isActive: activeSectionId == "Projects",
+      action: () => scroolIntoViewById("Projects"),
+    },
+    {
+      icon: <MailIcon />,
+      label: "Contact",
+      isActive: activeSectionId == "Contact",
+      action: () => scroolIntoViewById("Contact"),
+    },
+  ];
 
   return (
     <div>
@@ -101,17 +120,15 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
         <Head>
           <title>Ernest Przybył</title>
           <meta name="description" content="Portfolio of Ernest Przybył" />
-          <meta name="keywords" content="Frontend, Backend, Developer, Js, Javascript, portfilio"/>
+          <meta
+            name="keywords"
+            content="Frontend, Backend, Developer, Js, Javascript, portfilio"
+          />
           <meta name="author" content="Ernest Przybył"></meta>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <WindowScrollProgres />
-        <div
-          className={classNames("flex", {
-            "flex-col": displayMobileNav,
-            "flex-row-reverse": !displayMobileNav,
-          })}
-        >
+        <div className="flex flex-col md:flex-row-reverse">
           <div className="flex-grow">
             <Banner title="Hi I'm Ernest Przybł, a web developer" />
             <TrackableSectionContainer
@@ -147,28 +164,8 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
               </div>
             </TrackableSectionContainer>
           </div>
-          <Nav
-            actions={[
-              {
-                icon: <CirclePersonIcon />,
-                label: "AboutMe",
-                isActive: activeSectionId == "AboutMe",
-                action: () => scroolIntoViewById("AboutMe"),
-              },
-              {
-                icon: <WorkerIcon />,
-                label: "Projects",
-                isActive: activeSectionId == "Projects",
-                action: () => scroolIntoViewById("Projects"),
-              },
-              {
-                icon: <MailIcon />,
-                label: "Contact",
-                isActive: activeSectionId == "Contact",
-                action: () => scroolIntoViewById("Contact"),
-              },
-            ]}
-          ></Nav>
+          <BottomNav actions={navActions} className="md:invisible"></BottomNav>
+          <SideNav actions={navActions} className="invisible md:visible"></SideNav>
         </div>
       </ModalContextProvider>
     </div>

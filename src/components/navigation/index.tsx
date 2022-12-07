@@ -11,4 +11,5 @@ export type NavActionProps = {
 export type NavProps = {
   onLogoClick?: () => void;
   actions: NavActionProps[];
+  className?: string;
 };

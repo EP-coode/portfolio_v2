@@ -8,8 +8,10 @@ import SideNavAction from "./SideNavAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
-export const SideNav = ({ actions, onLogoClick }: NavProps) => (
-  <nav className="w-40 h-screen sticky top-0 left-0 bg-gray-light flex-grow-0 flex-shrink-0 z-20 flex flex-col">
+export const SideNav = ({ actions, onLogoClick, className }: NavProps) => (
+  <nav
+    className={`w-40 h-screen sticky top-0 left-0 bg-gray-light flex-grow-0 flex-shrink-0 z-20 flex flex-col ${className}`}
+  >
     <div
       onClick={onLogoClick}
       className={classNames("p-4 bg-stone-800 select-none", {
