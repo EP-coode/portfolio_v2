@@ -143,6 +143,7 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
                     <Section title="AboutMe">
                       <MarkdownSection content={aboutMeSection.content} />
                     </Section>
+                    <div className="divider"></div>
                   </TrackableSection>
                 )}
                 <TrackableSection id="Projects">
@@ -153,6 +154,7 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
                       ))}
                     </ProjectContainer>
                   </Section>
+                  <div className="divider"></div>
                 </TrackableSection>
                 <TrackableSection id="Contact">
                   <Section title="Contact" className="min-h-[20rem]">

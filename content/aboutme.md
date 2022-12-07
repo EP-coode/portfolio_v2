@@ -10,3 +10,15 @@ Log time ago I was also designing some 3d models as a hobby ([link](https://www.
 I was also a member of student science club [“Solvro” ](https://solvro.pwr.edu.pl/). Here I worked as Frontend developer in project “lokalniej”. We were designing administrator panel for this app using ant design. 
 
 Feel free to contact me I have some private repos on GitHub To show. I'm looking for to gain some practises in comertial work.
+
+### Main technologies:
+* JavaScript/TypeScript
+* React
+* Next.js
+* CSS, SCSS, TailwindCSS
+* .NET, C#
+* SQL
+* draw.io
+
+### Willing to learn:
+* Go
