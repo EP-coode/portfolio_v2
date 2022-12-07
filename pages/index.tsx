@@ -25,6 +25,7 @@ import { ProjectCard } from "../src/components/project/ProjectCard";
 import { ProjectContainer } from "../src/components/project/ProjectContainer";
 import dynamic from "next/dynamic";
 import { LoadingPlaceholder } from "../src/components/LoadingPlaceholder";
+import { Footer } from "../src/components/Footer";
 
 const ContactMeForm = dynamic(() => import("../src/components/ContactMeForm"), {
   suspense: true,
@@ -115,7 +116,7 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
   ];
 
   return (
-    <div>
+    <div className="flex flex-col md:flex-row-reverse">
       <ModalContextProvider>
         <Head>
           <title>Ernest Przybył</title>
@@ -128,45 +129,44 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <WindowScrollProgres />
-        <div className="flex flex-col md:flex-row-reverse">
-          <div className="flex-grow">
-            <Banner title="Hi I'm Ernest Przybł, a web developer" />
-            <TrackableSectionContainer
-              activeSectionSelectionStrategy={selectElementVisableInBottom}
-              onActiveSectionChange={(sectionId) =>
-                setActiveSectionId(sectionId)
-              }
-            >
-              <div className="p-7 pb-24 overflow-hidden">
-                {aboutMeSection && (
-                  <TrackableSection id="AboutMe">
-                    <Section title="AboutMe">
-                      <MarkdownSection content={aboutMeSection.content} />
-                    </Section>
-                  </TrackableSection>
-                )}
-                <TrackableSection id="Projects">
-                  <Section title="Projects">
-                    <ProjectContainer>
-                      {projects.map((project) => (
-                        <ProjectCard project={project} key={project.id} />
-                      ))}
-                    </ProjectContainer>
+        <div className="flex-grow">
+          <Banner title="Hi I'm Ernest Przybł, a web developer" />
+          <TrackableSectionContainer
+            activeSectionSelectionStrategy={selectElementVisableInBottom}
+            onActiveSectionChange={setActiveSectionId}
+          >
+            <div className="p-7 pb-24 overflow-hidden">
+              {aboutMeSection && (
+                <TrackableSection id="AboutMe">
+                  <Section title="AboutMe">
+                    <MarkdownSection content={aboutMeSection.content} />
                   </Section>
+                  <div className="divider"></div>
                 </TrackableSection>
-                <TrackableSection id="Contact">
-                  <Section title="Contact" className="min-h-[20rem]">
-                    <Suspense fallback={<LoadingPlaceholder />}>
-                      <ContactMeForm />
-                    </Suspense>
-                  </Section>
-                </TrackableSection>
-              </div>
-            </TrackableSectionContainer>
-          </div>
-          <BottomNav actions={navActions} className="md:hidden"></BottomNav>
-          <SideNav actions={navActions} className="hidden md:flex"></SideNav>
+              )}
+              <TrackableSection id="Projects">
+                <Section title="Projects">
+                  <ProjectContainer>
+                    {projects.map((project) => (
+                      <ProjectCard project={project} key={project.id} />
+                    ))}
+                  </ProjectContainer>
+                </Section>
+                <div className="divider"></div>
+              </TrackableSection>
+              <TrackableSection id="Contact">
+                <Section title="Contact" className="min-h-[20rem]">
+                  <Suspense fallback={<LoadingPlaceholder />}>
+                    <ContactMeForm />
+                  </Suspense>
+                </Section>
+              </TrackableSection>
+            </div>
+          </TrackableSectionContainer>
+          <Footer />
         </div>
+        <BottomNav actions={navActions} className="md:hidden"></BottomNav>
+        <SideNav actions={navActions} className="hidden md:flex"></SideNav>
       </ModalContextProvider>
     </div>
   );
