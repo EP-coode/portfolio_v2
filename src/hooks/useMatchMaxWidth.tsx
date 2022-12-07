@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useMatchMaxWidth = (maxWidth: string) => {
   const [isMatching, setIsMatching] = useState(false);

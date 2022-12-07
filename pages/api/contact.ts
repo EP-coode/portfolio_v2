@@ -46,7 +46,7 @@ export default async function handler(
       });
       res.status(200).send(undefined);
     }
-  } catch (e: any) {
+  } catch (e: unknown) {
     res.status(500).send(undefined);
   }
 }

@@ -5,9 +5,6 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 474 474"
-    style={{
-      enableBackground: "new 0 0 474 474",
-    }}
     xmlSpace="preserve"
     {...props}
     fill="currentColor"
