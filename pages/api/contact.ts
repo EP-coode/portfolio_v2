@@ -37,12 +37,16 @@ export default async function handler(
     if (errors.length > 0) {
       res.status(400).send(errors);
     } else {
+      console.log(
+        `Sending message from ${data.email} - ${data.name} with content: ${data.content}`
+      );
       await mailClient.sendMail({
-        sender: data.email,
+        from: data.email,
         replyTo: data.email,
         to: process.env.TARGET_MAIL,
         subject: `MY PORTFOLIO - ${data.name}`,
         text: data.content,
+        priority: "high",
       });
       res.status(200).send(undefined);
     }
