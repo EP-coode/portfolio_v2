@@ -1,5 +1,4 @@
 import { promises as fs } from "fs";
-import classNames from "classnames";
 import matter from "gray-matter";
 import type {
   GetServerSideProps,
@@ -13,7 +12,6 @@ import Banner from "../src/components/Banner";
 import { MarkdownSection } from "../src/components/MarkdownSection";
 import WindowScrollProgres from "../src/components/WindowScrollProgres";
 import { TrackableSectionContainer } from "../src/components/trackableSection/TrackableSectionContainer";
-import useMatchMaxWidth from "../src/hooks/useMatchMaxWidth";
 import { CirclePersonIcon, MailIcon, WorkerIcon } from "../src/icons";
 import { TrackableSection } from "../src/components/trackableSection/TrackableSection";
 import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
