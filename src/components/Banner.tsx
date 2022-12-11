@@ -1,13 +1,21 @@
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
 
 import bannerImage from "../../public/images/banner.webp";
+import useMatchMaxWidth from "../hooks/useMatchMaxWidth";
 
 type Props = {
   title: string;
 };
 
+const DynamicParticles = dynamic(
+  () => import("./Particles"),
+  { suspense: true, ssr: false }
+);
+
 export default function Banner({ title }: Props) {
+  const hideParticles = useMatchMaxWidth("768px");
   return (
     <div className="h-screen relative">
       <h1
@@ -27,6 +35,7 @@ export default function Banner({ title }: Props) {
         objectFit="cover"
         placeholder="blur"
       />
+      <Suspense>{!hideParticles && <DynamicParticles />}</Suspense>
     </div>
   );
 }
