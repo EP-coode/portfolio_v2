@@ -13,7 +13,7 @@ const Particles = () => {
     const particlesSystem = new ParticlesSystem(canvasRef.current, {
       particles: {
         ...defaultConfig.particles,
-        count: 1000,
+        count: 750,
       },
     });
 
@@ -23,6 +23,7 @@ const Particles = () => {
     setParticlesSystem(particlesSystem);
 
     return () => {
+      particlesSystem.stop()
       particlesSystem.dispose();
     };
   }, [canvasRef]);
