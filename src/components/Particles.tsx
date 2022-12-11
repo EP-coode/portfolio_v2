@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ParticlesSystem, defaultConfig, SpawnStrategy } from "@ep44/particles-emmiter";
+import { defaultConfig, ParticlesSystem } from "@ep44/particles-emmiter";
 
 const Particles = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,10 +11,11 @@ const Particles = () => {
     if (!canvasRef.current) return;
 
     const particlesSystem = new ParticlesSystem(canvasRef.current, {
-      particles: {
-        ...defaultConfig.particles,
-        count: 750,
+      mouse: {
+        ...defaultConfig.mouse,
+        mass: 15,
       },
+      ambientForce: [0.3,-0.4]
     });
 
     particlesSystem.setRespanw(true);
@@ -23,7 +24,7 @@ const Particles = () => {
     setParticlesSystem(particlesSystem);
 
     return () => {
-      particlesSystem.stop()
+      particlesSystem.stop();
       particlesSystem.dispose();
     };
   }, [canvasRef]);

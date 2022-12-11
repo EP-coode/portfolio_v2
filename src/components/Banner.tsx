@@ -29,7 +29,7 @@ export default function Banner({ title }: Props) {
       </h1>
       <Image
         src={bannerImage}
-        className="brightness-50 z-0"
+        className="brightness-50 md:brightness-[25%] z-0"
         alt="laptop on the desk"
         layout="fill"
         objectFit="cover"
