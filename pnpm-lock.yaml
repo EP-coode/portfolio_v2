@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@ep44/particles-emmiter': ^0.0.17
+  '@ep44/particles-emmiter': ^0.0.18
   '@fortawesome/fontawesome-svg-core': ^6.2.1
   '@fortawesome/free-brands-svg-icons': ^6.2.1
   '@fortawesome/free-regular-svg-icons': ^6.2.1
@@ -39,7 +39,7 @@ specifiers:
   yup: ^0.32.11
 
 dependencies:
-  '@ep44/particles-emmiter': 0.0.17
+  '@ep44/particles-emmiter': 0.0.18
   '@fortawesome/fontawesome-svg-core': 6.2.1
   '@fortawesome/free-brands-svg-icons': 6.2.1
   '@fortawesome/free-regular-svg-icons': 6.2.1
@@ -98,8 +98,8 @@ packages:
     resolution: {integrity: sha512-q/yVUnqckA8Do+EvAfpy7RLdumnBy9ZsducMUtZTvpdbJC7azEf1hGtnYYxm0QfphYxjwggv6XtH64prvS1W+A==}
     dev: true
 
-  /@ep44/particles-emmiter/0.0.17:
-    resolution: {integrity: sha512-x0xBbKa5ET8aHSiNjQCgRpWiC0SSO1iicsSXbfj9CL06+Z66BG/AFfpkpuRr1SwAV02IY1fXWv6YEOQ+2Meo2A==}
+  /@ep44/particles-emmiter/0.0.18:
+    resolution: {integrity: sha512-KeTwnPuwCY4cnUWy+eFQsmCogKAcdrSGVgvsFK3ZpyOpNGULnyDZUvMGKlUjVu0es/pU7EmquF4fO8s8XWgm2g==}
     dev: false
 
   /@eslint/eslintrc/1.3.1:
