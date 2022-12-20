@@ -117,11 +117,14 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
     <div className="flex flex-col md:flex-row-reverse">
       <ModalContextProvider>
         <Head>
-          <title>Ernest Przybył</title>
-          <meta name="description" content="Portfolio of Ernest Przybył" />
+          <title>Ernest Przybył - IT specialist</title>
+          <meta
+            name="description"
+            content="Hi. I'm Full stack developer located in Poland.  Currently I'm studying at the Politechnika Wrocławska (PWR) at the faculty &quotInformatyka i zarządanie&quot I used to work as JavaScript developer but I also enjoy C#, GO and others. Feel free to chekout my website."
+          />
           <meta
             name="keywords"
-            content="Frontend, Backend, Developer, Js, Javascript, portfilio"
+            content="Frontend, Backend, Developer, Javascript, .NET, Web, IT"
           />
           <meta name="author" content="Ernest Przybył"></meta>
           <link rel="icon" href="/favicon.ico" />
