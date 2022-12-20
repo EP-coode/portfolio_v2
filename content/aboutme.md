@@ -15,10 +15,16 @@ Feel free to contact me I have some private repos on GitHub To show. I'm looking
 * JavaScript/TypeScript
 * React
 * Next.js
+* Node.js
 * CSS, SCSS, TailwindCSS
 * .NET, C#
 * SQL
 * draw.io
 
-### Willing to learn:
+#### Currently learnig:
 * Go
+
+#### Other used:
+* C++
+* Java
+* Python
