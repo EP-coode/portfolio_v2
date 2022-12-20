@@ -143,7 +143,7 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
                 </TrackableSection>
               )}
               <TrackableSection id="Projects">
-                <Section title="Projects">
+                <Section title="Sample projects">
                   <ProjectContainer>
                     {projects.map((project) => (
                       <ProjectCard project={project} key={project.id} />
