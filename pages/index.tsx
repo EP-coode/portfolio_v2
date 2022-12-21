@@ -131,7 +131,7 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
         </Head>
         <WindowScrollProgres />
         <div className="flex-grow">
-          <Banner title="Hi I'm Ernest Przybł, a web developer" />
+          <Banner title="Hi I'm Ernest Przybył, a web developer" />
           <TrackableSectionContainer
             activeSectionSelectionStrategy={selectElementVisableInBottom}
             onActiveSectionChange={setActiveSectionId}
