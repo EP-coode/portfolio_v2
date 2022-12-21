@@ -1,5 +1,3 @@
-import { promises as fs } from "fs";
-import matter from "gray-matter";
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -24,6 +22,8 @@ import { ProjectContainer } from "../src/components/project/ProjectContainer";
 import dynamic from "next/dynamic";
 import { LoadingPlaceholder } from "../src/components/LoadingPlaceholder";
 import { Footer } from "../src/components/Footer";
+import { getAllProjects } from "../src/repository/projects";
+import { getAboutMeSection } from "../src/repository/personal";
 
 const ContactMeForm = dynamic(() => import("../src/components/ContactMeForm"), {
   suspense: true,
@@ -40,37 +40,8 @@ export const getStaticProps: GetServerSideProps<IndexPageProps> = async () => {
   let projects: Project[] = [];
 
   try {
-    const readFile = await fs.readFile(`content/aboutme.md`, "utf-8");
-    const { data, content } = matter(readFile);
-    aboutMeSection = {
-      data: data as { title: string },
-      content,
-    };
-
-    const projectsDir = await fs.readdir("content/projects");
-
-    projects = await Promise.all(
-      projectsDir.map(async (fileName) => {
-        const readFile = await fs.readFile(
-          `content/projects/${fileName}`,
-          "utf-8"
-        );
-        const { data, content } = matter(readFile);
-        const project: Project = {
-          id: data.id ?? null,
-          title: data.title ?? null,
-          images: data.images ?? null,
-          live_sample_link: data.live_sample_link ?? null,
-          repo_link: data.repo_link ?? null,
-          teaser: data.teaser ?? null,
-          technologies: data.technologies ?? null,
-          content,
-        };
-        return project;
-      })
-    );
-
-    projects.sort((p1, p2) => (p1 < p2 ? -1 : p1 > p2 ? 1 : 0));
+    projects = await getAllProjects();
+    aboutMeSection = await getAboutMeSection();
   } catch (e) {
     console.error(e);
     return {
