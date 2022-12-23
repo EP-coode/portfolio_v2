@@ -16,5 +16,5 @@ technologies:
   ]
 teaser: "Fully responsive community portal for students, created during ZPI (Team Engineering Project). Here I was resposible for designing and implementig frontend and database project. Repository is not public. If you want details contat me."
 repo_link: "https://github.com/EP-coode/ZPI"
-live_sample_link:
+live_sample_link: "https://sc.eprzybyl.eu"
 ---
