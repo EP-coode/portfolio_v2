@@ -24,6 +24,11 @@ import { LoadingPlaceholder } from "../src/components/LoadingPlaceholder";
 import { Footer } from "../src/components/Footer";
 import { getAllProjects } from "../src/repository/projects";
 import { getAboutMeSection } from "../src/repository/personal";
+import { WorkExperienceEntry } from "../src/model/WorkExperienceEntry";
+import { getAllWorkExperienceEntries } from "../src/repository/workExperience";
+import { TimeLine } from "../src/components/timeline/TimeLine";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 
 const ContactMeForm = dynamic(() => import("../src/components/ContactMeForm"), {
   suspense: true,
@@ -33,15 +38,20 @@ const ContactMeForm = dynamic(() => import("../src/components/ContactMeForm"), {
 type IndexPageProps = {
   aboutMeSection: { content: string; data: { title: string } };
   projects: Project[];
+  workExperienceEntries: WorkExperienceEntry[];
 };
 
 export const getStaticProps: GetServerSideProps<IndexPageProps> = async () => {
   let aboutMeSection;
   let projects: Project[] = [];
+  let workExperienceEntries: WorkExperienceEntry[] = [];
 
   try {
-    projects = await getAllProjects();
-    aboutMeSection = await getAboutMeSection();
+    [projects, aboutMeSection, workExperienceEntries] = await Promise.all([
+      getAllProjects(),
+      getAboutMeSection(),
+      getAllWorkExperienceEntries(),
+    ]);
   } catch (e) {
     console.error(e);
     return {
@@ -53,6 +63,7 @@ export const getStaticProps: GetServerSideProps<IndexPageProps> = async () => {
     props: {
       aboutMeSection,
       projects,
+      workExperienceEntries,
     },
   };
 };
@@ -60,6 +71,7 @@ export const getStaticProps: GetServerSideProps<IndexPageProps> = async () => {
 const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
   aboutMeSection,
   projects,
+  workExperienceEntries,
 }) => {
   const [activeSectionId, setActiveSectionId] = useState<string | null>();
 
@@ -69,6 +81,12 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
       label: "AboutMe",
       isActive: activeSectionId == "AboutMe",
       action: () => scroolIntoViewById("AboutMe"),
+    },
+    {
+      icon: <FontAwesomeIcon icon={faBuilding} />,
+      label: "Experience",
+      isActive: activeSectionId == "WorkExperience",
+      action: () => scroolIntoViewById("WorkExperience"),
     },
     {
       icon: <WorkerIcon />,
@@ -109,7 +127,28 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
               {aboutMeSection && (
                 <TrackableSection id="AboutMe">
                   <Section title="AboutMe">
-                    <MarkdownSection content={aboutMeSection.content} />
+                    <MarkdownSection
+                      content={aboutMeSection.content}
+                      className="prose-lg"
+                    />
+                  </Section>
+                  <div className="divider"></div>
+                </TrackableSection>
+              )}
+              {workExperienceEntries && (
+                <TrackableSection id="WorkExperience">
+                  <Section title="Comercial experience">
+                    <div className="my-3">
+                      <TimeLine
+                        entries={workExperienceEntries.map((e, i) => ({
+                          description: e.description,
+                          timeLabel: `${e.from} - ${e.to ?? "now"}`,
+                          id: i,
+                          link: { label: e.company, link: e.company_link },
+                          title: e.position,
+                        }))}
+                      />
+                    </div>
                   </Section>
                   <div className="divider"></div>
                 </TrackableSection>
