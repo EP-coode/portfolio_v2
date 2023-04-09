@@ -1,19 +1,15 @@
 import type {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
+  GetStaticProps,
+  InferGetStaticPropsType,
   NextPage,
 } from "next";
 import Head from "next/head";
-import { Suspense, useState } from "react";
-import { SideNav, BottomNav } from "../src/components/navigation";
+import { Suspense, useEffect, useState } from "react";
 import Banner from "../src/components/Banner";
 import { MarkdownSection } from "../src/components/MarkdownSection";
-import WindowScrollProgres from "../src/components/WindowScrollProgres";
 import { TrackableSectionContainer } from "../src/components/trackableSection/TrackableSectionContainer";
-import { CirclePersonIcon, MailIcon, WorkerIcon } from "../src/icons";
 import { TrackableSection } from "../src/components/trackableSection/TrackableSection";
 import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
-import { scroolIntoViewById } from "../src/utils/scroolIntoViewById";
 import { Section } from "../src/components/Section";
 import { ModalContextProvider } from "../src/context/ModalContext";
 import { Project } from "../src/model/Project";
@@ -21,14 +17,11 @@ import { ProjectCard } from "../src/components/project/ProjectCard";
 import { ProjectContainer } from "../src/components/project/ProjectContainer";
 import dynamic from "next/dynamic";
 import { LoadingPlaceholder } from "../src/components/LoadingPlaceholder";
-import { Footer } from "../src/components/Footer";
 import { getAllProjects } from "../src/repository/projects";
 import { getAboutMeSection } from "../src/repository/personal";
 import { WorkExperienceEntry } from "../src/model/WorkExperienceEntry";
 import { getAllWorkExperienceEntries } from "../src/repository/workExperience";
 import { TimeLine } from "../src/components/timeline/TimeLine";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 
 const ContactMeForm = dynamic(() => import("../src/components/ContactMeForm"), {
   suspense: true,
@@ -41,7 +34,7 @@ type IndexPageProps = {
   workExperienceEntries: WorkExperienceEntry[];
 };
 
-export const getStaticProps: GetServerSideProps<IndexPageProps> = async () => {
+export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
   let aboutMeSection;
   let projects: Project[] = [];
   let workExperienceEntries: WorkExperienceEntry[] = [];
@@ -68,39 +61,21 @@ export const getStaticProps: GetServerSideProps<IndexPageProps> = async () => {
   };
 };
 
-const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
+const Home: NextPage<
+  InferGetStaticPropsType<typeof getStaticProps> & {
+    setActiveActionId: (actionId: string | null | undefined) => void;
+  }
+> = ({
   aboutMeSection,
   projects,
   workExperienceEntries,
+  setActiveActionId,
 }) => {
   const [activeSectionId, setActiveSectionId] = useState<string | null>();
 
-  const navActions = [
-    {
-      icon: <CirclePersonIcon />,
-      label: "AboutMe",
-      isActive: activeSectionId == "AboutMe",
-      action: () => scroolIntoViewById("AboutMe"),
-    },
-    {
-      icon: <FontAwesomeIcon icon={faBuilding} />,
-      label: "Experience",
-      isActive: activeSectionId == "WorkExperience",
-      action: () => scroolIntoViewById("WorkExperience"),
-    },
-    {
-      icon: <WorkerIcon />,
-      label: "Projects",
-      isActive: activeSectionId == "Projects",
-      action: () => scroolIntoViewById("Projects"),
-    },
-    {
-      icon: <MailIcon />,
-      label: "Contact",
-      isActive: activeSectionId == "Contact",
-      action: () => scroolIntoViewById("Contact"),
-    },
-  ];
+  useEffect(() => {
+    setActiveActionId(activeSectionId);
+  }, [activeSectionId]);
 
   return (
     <div className="flex flex-col md:flex-row-reverse">
@@ -116,7 +91,6 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
             content="Frontend, Backend, Developer, Javascript, .NET, Web, IT, portfolio"
           />
         </Head>
-        <WindowScrollProgres />
         <div className="flex-grow">
           <Banner title="Hi I'm Ernest Przybył, a web developer" />
           <TrackableSectionContainer
@@ -136,7 +110,7 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
                 </TrackableSection>
               )}
               {workExperienceEntries && (
-                <TrackableSection id="WorkExperience">
+                <TrackableSection id="Experience">
                   <Section title="Comercial experience">
                     <div className="my-3">
                       <TimeLine
@@ -172,10 +146,7 @@ const Home: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = ({
               </TrackableSection>
             </div>
           </TrackableSectionContainer>
-          <Footer />
         </div>
-        <BottomNav actions={navActions} className="md:hidden"></BottomNav>
-        <SideNav actions={navActions} className="hidden md:flex"></SideNav>
       </ModalContextProvider>
     </div>
   );
