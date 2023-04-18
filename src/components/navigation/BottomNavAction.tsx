@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { NavActionProps } from ".";
 
-
 export default function BottomNavAction({
   label,
   icon,

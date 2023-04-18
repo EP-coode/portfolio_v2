@@ -4,10 +4,10 @@ import {
   InferGetStaticPropsType,
   NextPage,
 } from "next";
-import { useRouter } from "next/router";
 import React from "react";
 import { Article } from "../../src/model/Article";
 import { getAllArticles, getArticleById } from "../../src/repository/articles";
+import { RichMarkdownContent } from "../../src/components/RichMarkdownContent";
 
 interface ArticlePageProps {
   article: Article;
@@ -61,10 +61,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const ArticlePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   article,
 }) => {
-  const router = useRouter();
-  const { article_slug } = router.query;
-
-  return <div>ArticlePage - {article_slug}</div>;
+  return (
+    <div className="max-w-4xl p-7 mx-auto">
+      <RichMarkdownContent content={article.mdContent} />
+    </div>
+  );
 };
 
 export default ArticlePage;

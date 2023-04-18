@@ -12,7 +12,7 @@ module.exports = {
       colors: {
         "gray-light": "#353535",
         "gray-dark": "#272727",
-      },
+      }
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],

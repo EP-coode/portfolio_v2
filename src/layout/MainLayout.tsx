@@ -9,17 +9,22 @@ type Props = {
   activeActionId: string;
 };
 
+const showProgressBarOnPaths = ["^/$", "^/articles/(.*)$"];
+
 export const MainLayout = ({ children, activeActionId }: Props) => {
   const router = useRouter();
   const _navActions = mainNavActions(router, activeActionId);
+  const showProggresBar = showProgressBarOnPaths.some(
+    (pathRegex) => (router.pathname.match(pathRegex)?.length ?? 0) > 0
+  );
 
   return (
     <div className="bg-gray-dark font-lato text-justify">
-      <WindowScrollProgres />
+      {showProggresBar && <WindowScrollProgres />}
       <div className="flex flex-col md:flex-row w-full">
         <SideNav actions={_navActions} className="hidden md:flex"></SideNav>
         <div className="min-h-screen grow-1 w-full flex flex-col">
-          <div className="flex-1">{children}</div>
+          <div className="flex-1 pb-24 overflow-hidden">{children}</div>
           <Footer />
         </div>
         <BottomNav

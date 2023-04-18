@@ -23,13 +23,13 @@ export type NavProps = {
 
 export const mainNavActions = (
   router: NextRouter,
-  activeActionId: string,
+  activeActionId: string
 ): NavActionProps[] => [
   {
     id: "AboutMe",
     icon: <CirclePersonIcon />,
     label: "AboutMe",
-    isActive: activeActionId == "AboutMe",
+    isActive: activeActionId == "AboutMe" && router.pathname == "/",
     action: async () => {
       if (router.pathname != "/") await router.push("/");
       scroolIntoViewById("AboutMe");
@@ -39,7 +39,7 @@ export const mainNavActions = (
     id: "Experience",
     icon: <FontAwesomeIcon icon={faBuilding} className="h-full" />,
     label: "Experience",
-    isActive: activeActionId == "Experience",
+    isActive: activeActionId == "Experience" && router.pathname == "/",
     action: async () => {
       if (router.pathname != "/") await router.push("/");
       scroolIntoViewById("Experience");
@@ -49,7 +49,7 @@ export const mainNavActions = (
     id: "Projects",
     icon: <WorkerIcon />,
     label: "Projects",
-    isActive: activeActionId == "Projects",
+    isActive: activeActionId == "Projects" && router.pathname == "/",
     action: async () => {
       if (router.pathname != "/") await router.push("/");
       scroolIntoViewById("Projects");
@@ -59,10 +59,19 @@ export const mainNavActions = (
     id: "Contact",
     icon: <MailIcon />,
     label: "Contact",
-    isActive: activeActionId == "Contact",
+    isActive: activeActionId == "Contact" && router.pathname == "/",
     action: async () => {
       if (router.pathname != "/") await router.push("/");
       scroolIntoViewById("Contact");
+    },
+  },
+  {
+    id: "Blog",
+    icon: <FontAwesomeIcon icon={faBuilding} className="h-full" />,
+    label: "Blog",
+    isActive: router.pathname == "/articles",
+    action: async () => {
+      router.push("/articles");
     },
   },
 ];

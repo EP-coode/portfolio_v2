@@ -1,8 +1,4 @@
-import type {
-  GetStaticProps,
-  InferGetStaticPropsType,
-  NextPage,
-} from "next";
+import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import { Suspense, useEffect, useState } from "react";
 import Banner from "../src/components/Banner";
@@ -97,7 +93,7 @@ const Home: NextPage<
             activeSectionSelectionStrategy={selectElementVisableInBottom}
             onActiveSectionChange={setActiveSectionId}
           >
-            <div className="p-7 pb-24 overflow-hidden">
+            <div className="p-7">
               {aboutMeSection && (
                 <TrackableSection id="AboutMe">
                   <Section title="AboutMe">
