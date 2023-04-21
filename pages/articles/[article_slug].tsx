@@ -8,6 +8,7 @@ import React from "react";
 import { Article } from "../../src/model/Article";
 import { getAllArticles, getArticleById } from "../../src/repository/articles";
 import { RichMarkdownContent } from "../../src/components/RichMarkdownContent";
+import MainContentContainer from "../../src/components/containers/MainContentContainer";
 
 interface ArticlePageProps {
   article: Article;
@@ -62,9 +63,9 @@ const ArticlePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   article,
 }) => {
   return (
-    <div className="max-w-4xl p-7 mx-auto">
+    <MainContentContainer>
       <RichMarkdownContent content={article.mdContent} />
-    </div>
+    </MainContentContainer>
   );
 };
 

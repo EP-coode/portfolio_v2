@@ -4,9 +4,21 @@ import path from "path";
 
 import { Article } from "../model/Article";
 
-export const getAllArticles = async (): Promise<Article[]> => {
+export const getAllArticles = async (
+  limit = 10,
+  page = 0
+): Promise<Article[]> => {
   try {
-    const articlesDir = await fs.readdir("content/articles");
+    const allArticleFiles = await fs.readdir("content/articles");
+    const startAtFileIndex = Math.min(
+      page * limit,
+      allArticleFiles.length - 1,
+      0
+    );
+    const articlesDir = allArticleFiles.slice(
+      startAtFileIndex,
+      Math.max(limit, 1)
+    );
 
     const articles = await Promise.all(
       articlesDir.map(async (fileName) => {
@@ -21,7 +33,9 @@ export const getAllArticles = async (): Promise<Article[]> => {
           date: data.date ?? null,
           tags: data.tags ?? null,
           title: data.title ?? null,
+          banner_img_url: data.banner_img_url ?? null,
           mdContent: content,
+          teaser: data.teaser ?? null,
         };
         return article;
       })
@@ -53,7 +67,9 @@ export const getArticleById = async (
       date: data.date ?? null,
       tags: data.tags ?? null,
       title: data.title ?? null,
+      banner_img_url: data.banner_img_url ?? null,
       mdContent: content,
+      teaser: data.teaser ?? null,
     };
     return article;
   } catch (e: any) {

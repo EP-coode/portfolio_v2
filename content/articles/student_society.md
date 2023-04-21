@@ -1,3 +1,10 @@
+---
+tags: ["React", "Next.js", "TailwindCSS", "JS", "TS", "Java", "Hibernate", "MySQL", "Azure Blob Storage"]
+title: "Student Society"
+date: "10.01.2023"
+banner_img_url: '/images/sc1.webp'
+teaser: "Social app for students"
+---
 # Student Society
 
 ## Opis
