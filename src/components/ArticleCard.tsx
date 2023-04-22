@@ -24,7 +24,7 @@ export const ArticleCard = ({ article }: Props) => {
             </div>
           ))}
         </div>
-        <p className="mt-3">{article.title}</p>
+        <p className="mt-3">{article.teaser} ...</p>
         <div className="card-actions justify-end">
           <Link href={`/articles/${article.slug}`}>
             <button className="btn gap-2">

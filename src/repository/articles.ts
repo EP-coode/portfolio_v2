@@ -22,14 +22,13 @@ export const getAllArticles = async (
 
     const articles = await Promise.all(
       articlesDir.map(async (fileName) => {
-        const { name } = path.parse(fileName);
         const readFile = await fs.readFile(
           `${BASE_CONTENT_PATH}/articles/${fileName}`,
           "utf-8"
         );
         const { data, content } = matter(readFile);
         const article: Article = {
-          slug: name,
+          slug: data.slug ?? null,
           date: data.date ?? null,
           tags: data.tags ?? null,
           title: data.title ?? null,

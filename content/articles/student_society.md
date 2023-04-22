@@ -4,6 +4,7 @@ title: "Student Society"
 date: "10.01.2023"
 banner_img_url: '/images/sc1.webp'
 teaser: "Social app for students"
+slug: "student_society"
 ---
 # Student Society
 

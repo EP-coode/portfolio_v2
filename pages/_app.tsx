@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import { MainLayout } from "../src/layout/MainLayout";
 import { useState } from "react";
 import Head from "next/head";
+import NextLoadingBackdrop from "../src/components/NextLoadingBackdrop";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [activeActionId, setActiveActionId] = useState("");
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <MainLayout activeActionId={activeActionId}>
         <Component {...pageProps} setActiveActionId={setActiveActionId} />
       </MainLayout>
+      <NextLoadingBackdrop />
       <Analytics />
     </div>
   );

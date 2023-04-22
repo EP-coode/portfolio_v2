@@ -21,7 +21,7 @@ interface PageProps {
   total_pages: number;
 }
 
-const pageSize = 2;
+const pageSize = 10;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const articlesCount = await getArticlesCount();
