@@ -69,7 +69,7 @@ export const mainNavActions = (
     id: "Blog",
     icon: <FontAwesomeIcon icon={faBuilding} className="h-full" />,
     label: "Blog",
-    isActive: router.pathname == "/articles/page/0",
+    isActive: router.pathname.startsWith("/articles/page"),
     action: async () => {
       router.push("/articles/page/0");
     },
