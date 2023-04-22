@@ -3,13 +3,14 @@ import matter from "gray-matter";
 import path from "path";
 
 import { Article } from "../model/Article";
+import { BASE_CONTENT_PATH } from ".";
 
 export const getAllArticles = async (
   limit = 10,
   page = 0
 ): Promise<Article[]> => {
   try {
-    const allArticleFiles = await fs.readdir("content/articles");
+    const allArticleFiles = await fs.readdir(`${BASE_CONTENT_PATH}/articles`);
     const startAtFileIndex = Math.min(
       page * limit,
       allArticleFiles.length - 1,
@@ -24,7 +25,7 @@ export const getAllArticles = async (
       articlesDir.map(async (fileName) => {
         const { name } = path.parse(fileName);
         const readFile = await fs.readFile(
-          `content/articles/${fileName}`,
+          `${BASE_CONTENT_PATH}/articles/${fileName}`,
           "utf-8"
         );
         const { data, content } = matter(readFile);
@@ -58,7 +59,7 @@ export const getArticleById = async (
 ): Promise<Article | null> => {
   try {
     const readFile = await fs.readFile(
-      `content/articles/${article_slug}.md`,
+      `${BASE_CONTENT_PATH}/articles/${article_slug}.md`,
       "utf-8"
     );
     const { data, content } = matter(readFile);

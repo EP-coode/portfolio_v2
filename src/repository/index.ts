@@ -1,0 +1,1 @@
+export const BASE_CONTENT_PATH = 'public/content';
