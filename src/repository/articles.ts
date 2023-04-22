@@ -6,19 +6,18 @@ import { Article } from "../model/Article";
 import { BASE_CONTENT_PATH } from ".";
 
 export const getAllArticles = async (
-  limit = 10,
-  page = 0
+  page = 0,
+  limit = 10
 ): Promise<Article[]> => {
   try {
     const allArticleFiles = await fs.readdir(`${BASE_CONTENT_PATH}/articles`);
     const startAtFileIndex = Math.min(
       page * limit,
-      allArticleFiles.length - 1,
-      0
+      Math.max(allArticleFiles.length - 1, 0)
     );
     const articlesDir = allArticleFiles.slice(
       startAtFileIndex,
-      Math.max(limit, 1)
+      Math.max(limit, 1) + startAtFileIndex
     );
 
     const articles = await Promise.all(
@@ -76,6 +75,22 @@ export const getArticleById = async (
   } catch (e: any) {
     if (e instanceof Error) {
       const err = new Error(`Failed to load about me section: ${e.message}`);
+      err.stack = e.stack;
+      throw err;
+    } else {
+      throw e;
+    }
+  }
+};
+
+export const getArticlesCount = async (): Promise<number> => {
+  try {
+    const allArticleFiles = await fs.readdir(`${BASE_CONTENT_PATH}/articles`);
+
+    return allArticleFiles.length;
+  } catch (e: any) {
+    if (e instanceof Error) {
+      const err = new Error(`Failed to count articles: ${e.message}`);
       err.stack = e.stack;
       throw err;
     } else {

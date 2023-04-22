@@ -6,6 +6,15 @@ const nextConfig = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  async redirects() {
+    return [
+      {
+        source: "/articles",
+        destination: "/articles/page/0",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

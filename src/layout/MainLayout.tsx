@@ -9,15 +9,15 @@ type Props = {
   activeActionId: string;
 };
 
-const showProgressBarOnPaths = ["^/$", "^/articles/(.*)$"];
+const showProgressBarOnPaths = ["/", "/articles/[article_slug]"];
 
 export const MainLayout = ({ children, activeActionId }: Props) => {
   const router = useRouter();
   const _navActions = mainNavActions(router, activeActionId);
   const showProggresBar = showProgressBarOnPaths.some(
-    (pathRegex) => (router.pathname.match(pathRegex)?.length ?? 0) > 0
+    (p) => p == router.pathname
   );
-
+  
   return (
     <div className="bg-gray-dark font-lato text-justify">
       {showProggresBar && <WindowScrollProgres />}

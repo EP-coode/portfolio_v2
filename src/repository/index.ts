@@ -1,1 +1,1 @@
-export const BASE_CONTENT_PATH = 'public/content';
+export const BASE_CONTENT_PATH = 'content';

@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps<
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = (await getAllArticles()).map((a) => ({
+  const paths = (await getAllArticles(0, Number.MAX_VALUE)).map((a) => ({
     params: { article_slug: a.slug },
     locale: "en",
   }));
