@@ -1,15 +1,16 @@
 import matter from "gray-matter";
 import fs from "fs/promises";
 import { Project } from "../model/Project";
+import { BASE_CONTENT_PATH } from ".";
 
 export const getAllProjects = async () => {
   try {
-    const projectsDir = await fs.readdir("content/projects");
+    const projectsDir = await fs.readdir(`${BASE_CONTENT_PATH}/projects`);
 
     const projects = await Promise.all(
       projectsDir.map(async (fileName) => {
         const readFile = await fs.readFile(
-          `content/projects/${fileName}`,
+          `${BASE_CONTENT_PATH}/projects/${fileName}`,
           "utf-8"
         );
         const { data, content } = matter(readFile);

@@ -2,9 +2,13 @@ import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-export const Footer = () => {
+export const Footer = ({ className }: { className?: string }) => {
   return (
-    <footer className="footer p-10 bg-neutral text-neutral-content">
+    <footer
+      className={`footer p-10 bg-neutral text-neutral-content ${
+        className ?? ""
+      }`}
+    >
       <div>
         <svg
           width="50"
