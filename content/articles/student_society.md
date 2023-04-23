@@ -9,7 +9,7 @@ slug: "student_society"
 # Student Society
 
 ## Opis
-Aplikacja webowa pozwalająca użytkowniką na wymianę treści oraz ich wyszukiwanie na podstawie predefiniowanych przez moderatorów kategorii oraz tworzonych przez urzytkowników tagów. Publikowane treści mogą zawierać multimedia tj. zdjęcia, a treść tekstową można edytować w "bogaty" sposób (docelowo markdown). 
+Aplikacja webowa pozwalająca użytkownika na wymianę treści oraz ich wyszukiwanie na podstawie predefiniowanych przez moderatorów kategorii oraz tworzonych przez użytkowników  tagów. Publikowane treści mogą zawierać multimedia tj. zdjęcia, a treść tekstową można edytować w "bogaty" sposób (docelowo markdown). 
 
 ## Użytkownicy
 - gość
@@ -28,7 +28,7 @@ Aplikacja webowa pozwalająca użytkowniką na wymianę treści oraz ich wyszuki
 - [x] Zalogowany użytkownik może dodawać komentarze do każdego postu
 - [ ] Użytkownik może wyszukiwać posty za pomocą frazy (opcjonalne)
 - [ ] Moderator może blokować określone posty
-- [ ] Moderator może nakłądać blokady czasowe na określonych użytkowników.
+- [ ] Moderator może nakładać blokady czasowe na określonych użytkowników.
 - [x] Możliwość wyboru motywów kolorystycznych dark i light
 
 ## Diagram aktywności
@@ -71,9 +71,9 @@ Aplikacja webowa pozwalająca użytkowniką na wymianę treści oraz ich wyszuki
     * DB_NAME - nazwa bazy danych 
     * DB_PASS - hasło bazy danych
     * DB_USER - urzytkownik bazy danych
-    * GMAIL_USER GMAIL_PASS - konto pocztowe urzywane do mailingu
+    * GMAIL_USER GMAIL_PASS - konto pocztowe używane do mailingu
     * JWT_KEY - klucz prywatny używany do tworzenia tokenów JWT
-    * AUTH_SERVICE_URL; DATA_PROVIDER_URL - adrss hosta aplikacji backendowej (lokanie nic nie trzeba zmieniać)
+    * AUTH_SERVICE_URL; DATA_PROVIDER_URL - adres hosta aplikacji backendowej (lokanie nic nie trzeba zmieniać)
 3. Zbudowanie dockerowych obrazów oraz uruchomienie 
 ```bash
 # budowanie obrazu
