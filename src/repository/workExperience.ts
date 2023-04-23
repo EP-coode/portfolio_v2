@@ -1,17 +1,18 @@
 import matter from "gray-matter";
 import fs from "fs/promises";
 import { WorkExperienceEntry } from "../model/WorkExperienceEntry";
+import { BASE_CONTENT_PATH } from ".";
 
 export const getAllWorkExperienceEntries = async (): Promise<
   WorkExperienceEntry[]
 > => {
   try {
-    const workExpDir = await fs.readdir("content/work_experience");
+    const workExpDir = await fs.readdir(`${BASE_CONTENT_PATH}/work_experience`);
 
     const workExpEntries = await Promise.all(
       workExpDir.map(async (fileName) => {
         const readFile = await fs.readFile(
-          `content/work_experience/${fileName}`,
+          `${BASE_CONTENT_PATH}/work_experience/${fileName}`,
           "utf-8"
         );
         const { data, content } = matter(readFile);

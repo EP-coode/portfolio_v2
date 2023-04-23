@@ -24,13 +24,14 @@ export const SideNav = ({ actions, onLogoClick, className }: NavProps) => (
       </h2>
     </div>
     <nav className="flex-grow flex flex-col justify-center overflow-hidden">
-      {actions.map(({ icon, label, isActive, action }) => (
+      {actions.map(({ icon, label, isActive, action, id }) => (
         <SideNavAction
           label={label}
           isActive={isActive}
           action={action}
           icon={icon}
-          key={label}
+          id={id}
+          key={id}
         />
       ))}
     </nav>
