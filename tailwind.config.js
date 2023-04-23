@@ -12,6 +12,9 @@ module.exports = {
       colors: {
         "gray-light": "#353535",
         "gray-dark": "#272727",
+      },
+      height: {
+        '128': '32rem'
       }
     },
   },
