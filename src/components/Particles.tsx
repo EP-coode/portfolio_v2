@@ -3,9 +3,9 @@ import {
   defaultConfig,
   ParticlesSystem,
   SpawnStrategy,
-  ColorRangeSelection,
-  LinearChange,
-} from "@ep44/particles-emmiter";
+} from "@ep44/particles-emiter";
+import { ColorRangeSelection } from "@ep44/particles-emiter/color-selection";
+import { LinearChange } from "@ep44/particles-emiter/size-change";
 
 const Particles = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -38,7 +38,7 @@ const Particles = () => {
       },
       ambientForce: [0.02, -0.02],
       speed: 0.1,
-      distanceScale: 0.05
+      distanceScale: 0.05,
     });
 
     particlesSystem.setRespanw(true);
