@@ -1,7 +1,7 @@
 ---
 title: 'About me'
 ---
-Hi. I'm Full stack developer located in Poland. I'm graduate of the Politechnika Wrocławska (PWR), faculty "Informatyka i zarządanie" (IT and management), major studies "Informatyka stosowana" (Applied Computer Science).
+Hi. I'm Full stack developer located in Poland. I'm graduate of the Politechnika Wrocławska (PWR), faculty "Informatyka i zarządanie" (IT and management), major of studies "Informatyka stosowana" (Applied Computer Science).
 
 I have choosen this major of studies to realize one of my passions which is developing working software. Apart this I'm interested in all sorts of electronics. But especially racing drones and 3d printers.
 

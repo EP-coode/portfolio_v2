@@ -10,4 +10,4 @@ company_link: "https://bigstar.pl/"
 * Colaborating with other teams.
 * Active participation in Agile meetings (standups, retrospectives, planning, etc.)
 * Conducting regular code reviews.
-* tech stack on frontend: Angular(v7,v8,v15), TypeScript, SCSS, Nunjucks, Guplp, GitLab CI/CD.
+* tech stack on frontend: Angular(v7,v8,v15), TypeScript, SCSS, Nunjucks, Gulp, GitLab CI/CD.
