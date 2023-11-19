@@ -45,16 +45,16 @@ export const mainNavActions = (
       scroolIntoViewById("Experience");
     },
   },
-  {
-    id: "Projects",
-    icon: <WorkerIcon />,
-    label: "Projects",
-    isActive: activeActionId == "Projects" && router.pathname == "/",
-    action: async () => {
-      if (router.pathname != "/") await router.push("/");
-      scroolIntoViewById("Projects");
-    },
-  },
+  // {
+  //   id: "Projects",
+  //   icon: <WorkerIcon />,
+  //   label: "Projects",
+  //   isActive: activeActionId == "Projects" && router.pathname == "/",
+  //   action: async () => {
+  //     if (router.pathname != "/") await router.push("/");
+  //     scroolIntoViewById("Projects");
+  //   },
+  // },
   {
     id: "Contact",
     icon: <MailIcon />,
