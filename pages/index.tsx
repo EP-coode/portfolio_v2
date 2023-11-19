@@ -8,12 +8,12 @@ import { TrackableSection } from "../src/components/trackableSection/TrackableSe
 import { selectElementVisableInBottom } from "../src/utils/activeSectionSelectionStrategies";
 import { Section } from "../src/components/Section";
 import { ModalContextProvider } from "../src/context/ModalContext";
-import { Project } from "../src/model/Project";
-import { ProjectCard } from "../src/components/project/ProjectCard";
-import { ProjectContainer } from "../src/components/project/ProjectContainer";
+// import { Project } from "../src/model/Project";
+// import { ProjectCard } from "../src/components/project/ProjectCard";
+// import { ProjectContainer } from "../src/components/project/ProjectContainer";
 import dynamic from "next/dynamic";
 import { LoadingPlaceholder } from "../src/components/LoadingPlaceholder";
-import { getAllProjects } from "../src/repository/projects";
+// import { getAllProjects } from "../src/repository/projects";
 import { getAboutMeSection } from "../src/repository/personal";
 import { WorkExperienceEntry } from "../src/model/WorkExperienceEntry";
 import { getAllWorkExperienceEntries } from "../src/repository/workExperience";
@@ -26,18 +26,18 @@ const ContactMeForm = dynamic(() => import("../src/components/ContactMeForm"), {
 
 type IndexPageProps = {
   aboutMeSection: { content: string; data: { title: string } };
-  projects: Project[];
+  // projects: Project[];
   workExperienceEntries: WorkExperienceEntry[];
 };
 
 export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
   let aboutMeSection;
-  let projects: Project[] = [];
+  // let projects: Project[] = [];
   let workExperienceEntries: WorkExperienceEntry[] = [];
 
   try {
-    [projects, aboutMeSection, workExperienceEntries] = await Promise.all([
-      getAllProjects(),
+    [aboutMeSection, workExperienceEntries] = await Promise.all([
+      // getAllProjects(),
       getAboutMeSection(),
       getAllWorkExperienceEntries(),
     ]);
@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
   return {
     props: {
       aboutMeSection,
-      projects,
+      // projects,
       workExperienceEntries,
     },
   };
@@ -63,7 +63,7 @@ const Home: NextPage<
   }
 > = ({
   aboutMeSection,
-  projects,
+  // projects,
   workExperienceEntries,
   setActiveActionId,
 }) => {
@@ -123,7 +123,7 @@ const Home: NextPage<
                   <div className="divider"></div>
                 </TrackableSection>
               )}
-              <TrackableSection id="Projects">
+              {/* <TrackableSection id="Projects">
                 <Section title="Sample projects">
                   <ProjectContainer>
                     {projects.map((project) => (
@@ -132,7 +132,7 @@ const Home: NextPage<
                   </ProjectContainer>
                 </Section>
                 <div className="divider"></div>
-              </TrackableSection>
+              </TrackableSection> */}
               <TrackableSection id="Contact">
                 <Section title="Contact" className="min-h-[20rem]">
                   <Suspense fallback={<LoadingPlaceholder />}>
