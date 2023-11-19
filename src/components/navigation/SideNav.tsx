@@ -18,7 +18,7 @@ export const SideNav = ({ actions, onLogoClick, className }: NavProps) => (
         "cursor-pointer": onLogoClick,
       })}
     >
-      <Image src={logo} objectFit="cover" placeholder="blur" alt="logo" />
+      <Image src={logo} objectFit="cover" alt="logo" />
       <h2 className="text-white text-center text-2xl font-mono">
         Ernest Przybył
       </h2>
