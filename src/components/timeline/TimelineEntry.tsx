@@ -24,8 +24,7 @@ export const TimelineEntry = ({ entry, align }: Props) => {
         )}
       >
         <span className="badge badge-md p-4">{entry.timeLabel}</span>
-        <h3 className="text-lg shrink-1">{entry.title}</h3>
-
+        <h3 className="text-lg shrink-1 text-left">{entry.title}</h3>
         <a
           className="btn btn-accent btn-xs h-fit normal-case"
           href={entry.link.link ?? ""}

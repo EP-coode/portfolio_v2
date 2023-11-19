@@ -17,19 +17,19 @@ export const MainLayout = ({ children, activeActionId }: Props) => {
   const showProggresBar = showProgressBarOnPaths.some(
     (p) => p == router.pathname
   );
-  
+
   return (
     <div className="bg-gray-dark font-lato text-justify">
       {showProggresBar && <WindowScrollProgres />}
       <div className="flex flex-col md:flex-row w-full">
         <SideNav actions={_navActions} className="hidden md:flex"></SideNav>
-        <div className="min-h-screen grow-1 w-full flex flex-col">
-          <div className="flex-1 pb-24 overflow-hidden">{children}</div>
+        <div className="min-h-screen grow-1 w-full flex flex-col md:mb-0 mb-14">
+          <div className="flex-1 pb-24 overflow-hidden ">{children}</div>
           <Footer />
         </div>
         <BottomNav
           actions={_navActions}
-          className="md:hidden z-50 sticky bottom-0"
+          className="md:hidden z-50 fixed bottom-0"
         ></BottomNav>
       </div>
     </div>
