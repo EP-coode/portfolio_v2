@@ -14,8 +14,12 @@ module.exports = {
         "gray-dark": "#272727",
       },
       height: {
-        '128': '32rem'
-      }
+        128: "32rem",
+      },
+      minHeight: {
+        32: "8rem",
+        64: "16rem",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
