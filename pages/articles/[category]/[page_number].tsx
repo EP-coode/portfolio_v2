@@ -148,7 +148,8 @@ const ArticlePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                   "btn btn-sm btn-outline btn-secondary"
                 )}
               >
-                {tag} <span className="ml-1.5 font-thin">({number_of_articles})</span>
+                {tag}
+                <span className="ml-1.5 font-thin">({number_of_articles})</span>
               </button>
             </Link>
           ))}
