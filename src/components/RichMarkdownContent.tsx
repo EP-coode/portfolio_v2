@@ -57,6 +57,12 @@ export const RichMarkdownContent: FC<Props> = ({ content, className }) => {
               {children}
             </ul>
           ),
+          img: ({ node, children, className, ...props }) => (
+            <img
+              {...props}
+              className="min-h-32 lg:min-h-64 object-contain mx-auto"
+            ></img>
+          ),
         }}
       >
         {content}
