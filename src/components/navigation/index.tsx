@@ -1,7 +1,7 @@
 import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextRouter } from "next/router";
-import { CirclePersonIcon, WorkerIcon, MailIcon } from "../../icons";
+import { CirclePersonIcon, MailIcon } from "../../icons";
 import { scroolIntoViewById } from "../../utils/scroolIntoViewById";
 
 export { BottomNav } from "./BottomNav";
@@ -69,9 +69,9 @@ export const mainNavActions = (
     id: "Blog",
     icon: <FontAwesomeIcon icon={faBuilding} className="h-full" />,
     label: "Blog",
-    isActive: router.pathname.startsWith("/articles/page"),
+    isActive: router.pathname.startsWith("/articles/all"),
     action: async () => {
-      router.push("/articles/page/0");
+      router.push("/articles/all/0");
     },
   },
 ];
