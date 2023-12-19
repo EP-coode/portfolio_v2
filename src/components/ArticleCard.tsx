@@ -24,9 +24,11 @@ export const ArticleCard = ({ article }: Props) => {
             day: "numeric",
           })}
         </div>
-        <h2 className="card-title text-2xl hover:text-white cursor-pointer">
-          {article.title}
-        </h2>
+        <Link href={`/article/${article.slug}`}>
+          <h2 className="card-title text-2xl hover:text-white cursor-pointer">
+            {article.title}
+          </h2>
+        </Link>
         <div className="flex gap-1.5 flex-wrap mt-2">
           {article.tags.map((tag) => (
             <div className="badge badge-md badge-accent" key={tag}>
