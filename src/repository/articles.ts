@@ -1,27 +1,15 @@
 import fs from "fs/promises";
 import matter from "gray-matter";
-import path from "path";
 
 import { Article } from "../model/Article";
 import { BASE_CONTENT_PATH } from ".";
 
-export const getAllArticles = async (
-  page = 0,
-  limit = 10
-): Promise<Article[]> => {
+export const getAllArticles = async (): Promise<Article[]> => {
   try {
     const allArticleFiles = await fs.readdir(`${BASE_CONTENT_PATH}/articles`);
-    const startAtFileIndex = Math.min(
-      page * limit,
-      Math.max(allArticleFiles.length - 1, 0)
-    );
-    const articlesDir = allArticleFiles.slice(
-      startAtFileIndex,
-      Math.max(limit, 1) + startAtFileIndex
-    );
 
     const articles = await Promise.all(
-      articlesDir.map(async (fileName) => {
+      allArticleFiles.map(async (fileName) => {
         const readFile = await fs.readFile(
           `${BASE_CONTENT_PATH}/articles/${fileName}`,
           "utf-8"
@@ -97,3 +85,26 @@ export const getArticlesCount = async (): Promise<number> => {
     }
   }
 };
+
+/**
+ *
+ * @param articles
+ * @returns unique tags used in articles and numer of usages
+ */
+export function extractUniqueTagsFromArticles(articles: Article[]): {
+  [id: string]: number;
+} {
+  const tagCounts: { [id: string]: number } = {};
+
+  for (const article of articles) {
+    for (const tag of article.tags) {
+      if (!tagCounts[tag]) {
+        tagCounts[tag] = 1;
+      } else {
+        tagCounts[tag]++;
+      }
+    }
+  }
+
+  return tagCounts;
+}
