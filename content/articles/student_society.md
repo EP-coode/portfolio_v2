@@ -1,9 +1,9 @@
 ---
-tags: ["React", "Next.js", "TailwindCSS", "JS", "TS", "Java", "Hibernate", "MySQL", "Azure Blob Storage"]
+tags: ["React", "Next.js", "TailwindCSS", "JS", "TS", "Java", "Hibernate", "MySQL", "Azure"]
 title: "Student Society"
-date: "10.01.2023"
+date: "10.11.2022"
 banner_img_url: '/images/sc1.webp'
-teaser: "Social app for students"
+teaser: "Project that includes both design and implementation. It consist of two modules, backend in JAVA and frontend in React. It is designed to be used as social platform"
 slug: "student_society"
 ---
 # Student Society
