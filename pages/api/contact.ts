@@ -49,8 +49,10 @@ export default async function handler(
         priority: "high",
       });
       res.status(200).send(undefined);
+      console.log(`Message sent succesfuly`);
     }
   } catch (e: unknown) {
     res.status(500).send(undefined);
+    console.error(`Failed to sent message: ${e}`);
   }
 }
