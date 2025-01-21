@@ -3,15 +3,15 @@ title: 'About me'
 ---
 Hi. I'm Full stack developer located in Poland. I'm graduate of the Politechnika Wrocławska (PWR), faculty "Informatyka i zarządanie" (IT and management), major of studies "Informatyka stosowana" (Applied Computer Science).
 
-I have choosen this major of studies to realize one of my passions which is developing working software. Apart this I'm interested in all sorts of electronics. But especially racing drones and 3d printers.
+As hobby sometimes I design 3d models for 3d printing ([thingiverse](https://www.thingiverse.com/ernest13/designs))([sketchfab](https://sketchfab.com/Wietecky1357/models)). Currently, I work with [OneShape](https://www.onshape.com/en/) as CAD and [Blender](https://www.blender.org/). 
 
-As hobby sometimes I design 3d models ([link](https://www.thingiverse.com/ernest13/designs)). Currently i work with [OneShape](https://www.onshape.com/en/) as CAD and [Blender](https://www.blender.org/). 
+### I work with mainly:
 
-### I work with:
-
-- Languages: JavaScript/TypeScript, SQL, PL/SQL
+- Languages: JavaScript/TypeScript, SQL, PHP
 - Tech: Angular, React, Next.js, Node.js, Express.js, CSS, SCSS, TailwindCSS. draw.io, Jira, Confluence, git, GitFlow, GitHub, GitLab
 
 #### I have also used these:
 
 - Go, C#/.NET, Java, Kotlin (Android), Python, C++, Rust
+
+Go, C# and Kotlin are environments that I enjoyed most, but I never had a chance to use them in production.
