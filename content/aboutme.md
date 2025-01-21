@@ -5,7 +5,7 @@ Hi. I'm Full stack developer located in Poland. I'm graduate of the Politechnika
 
 As hobby sometimes I design 3d models for 3d printing ([thingiverse](https://www.thingiverse.com/ernest13/designs))([sketchfab](https://sketchfab.com/Wietecky1357/models)). Currently, I work with [OneShape](https://www.onshape.com/en/) as CAD and [Blender](https://www.blender.org/). 
 
-### I work with mainly:
+### I work mainly with:
 
 - Languages: JavaScript/TypeScript, SQL, PHP
 - Tech: Angular, React, Next.js, Node.js, Express.js, CSS, SCSS, TailwindCSS. draw.io, Jira, Confluence, git, GitFlow, GitHub, GitLab
